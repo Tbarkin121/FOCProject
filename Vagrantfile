@@ -36,10 +36,18 @@ Vagrant.configure("2") do |config|
     vb.memory = mem
 
     # Pass the ST-Link debug port to the VM
-    vb.customize ['modifyvm', :id, '--usb', 'on']
+    #vb.customize ['modifyvm', :id, '--usb', 'on']
     #vb.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'Segger', '--vendorid', '0x1366', '--productid', '0x0101']
     #vb.customize ['guestproperty', 'set', vm_name, '/VirtualBox/GuestAdd/VBoxService/--timesync-set-threshold', '1000']
-
+    
+    # Turn on USB 2.0 support and add usb filter to attach STLink V2 programmer.
+    # Note that the VirtualBox extension pack MUST be installed first from:
+    #   https://www.virtualbox.org/wiki/Downloads
+    # Also on Linux be sure to add your user to the vboxusers group, see:
+    #   http://unix.stackexchange.com/questions/129305/how-can-i-enable-access-to-usb-devices-within-virtualbox-guests
+    #vb.customize ['modifyvm', :id, '--usb', 'on']
+    #vb.customize ['modifyvm', :id, '--usbehci', 'on']
+    #vb.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'STLink', '--vendorid', '0x0483', '--productid', '0x3748']
     # Display the VirtualBox GUI when booting the machine
     vb.gui = false
 
