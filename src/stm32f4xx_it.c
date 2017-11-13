@@ -1,9 +1,9 @@
-/** 
+/**
   ******************************************************************************
-  * @file    Templates_LL/Src/stm32f4xx_it.c
+  * @file    Templates/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and
+  *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -36,13 +36,14 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
+#include "main.h"
 #include "stm32f4xx_it.h"
 
-/** @addtogroup STM32F4xx_LL_Examples
+/** @addtogroup STM32F4xx_HAL_Examples
   * @{
   */
 
-/** @addtogroup Templates_LL
+/** @addtogroup Templates
   * @{
   */
 
@@ -59,7 +60,7 @@
 /******************************************************************************/
 
 /**
-  * @brief  This function handles NMI exception.
+  * @brief   This function handles NMI exception.
   * @param  None
   * @retval None
   */
@@ -153,18 +154,29 @@ void PendSV_Handler(void)
   */
 void SysTick_Handler(void)
 {
+  HAL_IncTick();
 }
 
 /******************************************************************************/
 /*                 STM32F4xx Peripherals Interrupt Handlers                   */
-/*  Add here the Interrupt Handler for the used peripheral(s) (GPIO), for the  */
+/*  Add here the Interrupt Handler for the used peripheral(s) (PPP), for the  */
 /*  available peripheral interrupt handler's name please refer to the startup */
 /*  file (startup_stm32f4xx.s).                                               */
 /******************************************************************************/
 
 /**
-  * @}
+  * @brief  This function handles PPP interrupt request.
+  * @param  None
+  * @retval None
   */
+/*void PPP_IRQHandler(void)
+{
+}*/
+
+
+/**
+  * @}
+  */ 
 
 /**
   * @}

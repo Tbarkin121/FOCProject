@@ -22,22 +22,22 @@ set(SCRIPTS_PATH ${CMAKE_SOURCE_DIR}/tools)
 set(STLINK_PATH ${SCRIPTS_PATH}/stlink/build/Release)
 
 set(STM_LIB_SOURCES
-        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
-        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c
-        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c
-        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_crc.c
-        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c
-        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c
-        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c
-        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c
-        ##${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c
-        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_iwdg.c
-        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rtc.c
-        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rtc_ex.c
-        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c
-        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c
-        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c
-        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_crc.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_iwdg.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rtc.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rtc_ex.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c
         ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c
         )
 
@@ -196,43 +196,14 @@ target_link_libraries(${MAIN_BUILD} PROJECT)
 target_link_libraries(${MAIN_BUILD} STM)
 set_target_properties(${MAIN_BUILD} PROPERTIES LINK_FLAGS "${GCC_TARGET_LINK_SCRIPTS} -fprofile-arcs -Wl,-Map,${MAIN_BUILD}.map")
 set_target_properties(${MAIN_BUILD} PROPERTIES COMPILE_FLAGS "-mfpu=fpv4-sp-d16")
-#add_custom_command(OUTPUT ${OPENOCD_COMMAND}
-#    COMMAND ${SCRIPTS_PATH}/burn.sh -b ${PROJECT_BINARY_DIR}/${MAIN_BUILD}
-#    DEPENDS ${MAIN_BUILD}
-#    COMMENT "Running application"
-#    )
-#set_source_files_properties(${OPENOCD_COMMAND} SYMBOLIC 1)
-add_custom_target(foc)
-
-#Burn STM32F4Discovery 
-add_custom_command(OUTPUT burn-command
-        COMMAND ${STLINK_PATH}/st-flash write ${CMAKE_PROJECT_NAME} 0x08000000}
-        COMMENT "Burning"
-        )
-set_source_files_properties(burn-command SYMBOLIC 1)
-add_custom_target(burn ALL DEPENDS burn-command)
-
-
-    #set(OPENOCD_COMMAND openocd-command-app-${build_type})
-    #add_custom_command(OUTPUT ${OPENOCD_COMMAND}
-    #    COMMAND ${SCRIPTS_PATH}/ctswload.sh -b ${PROJECT_BINARY_DIR}/${MAIN_BUILD}
-    #    DEPENDS ${MAIN_BUILD}
-    #    COMMENT "Running application"
-    #    )
-    #set_source_files_properties(${OPENOCD_COMMAND} SYMBOLIC 1)
-    #add_custom_target(app-${build_type} DEPENDS ${OPENOCD_COMMAND})
-
-# Lint target
-#add_custom_command(OUTPUT lint-command
-#        COMMAND ${SCRIPTS_PATH}/cpplint.py --verbose=0 --linelength=100 --root=${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/include/* ${CMAKE_SOURCE_DIR}/src/* ${CMAKE_SOURCE_DIR}/src/states/* ${CMAKE_SOURCE_DIR}/test/include/* ${ALL_UNIT_TEST_SRCS} ${ALL_UNIT_TEST_HW_SRCS} ${QEMU_TEST_RUNNER_SOURCES}
-#        COMMENT "Linting"
-#        )
-#set_source_files_properties(lint-command SYMBOLIC 1)
-#add_custom_target(lint ALL DEPENDS lint-command)
-
-
-
-
+set(OPENOCD_COMMAND openocd-command-app-${build_type})
+add_custom_command(OUTPUT ${OPENOCD_COMMAND}
+    COMMAND ${SCRIPTS_PATH}/load.sh -b ${PROJECT_BINARY_DIR}/${MAIN_BUILD}
+    DEPENDS ${MAIN_BUILD}
+    COMMENT "Running application"
+    )
+set_source_files_properties(${OPENOCD_COMMAND} SYMBOLIC 1)
+add_custom_target(app} DEPENDS ${OPENOCD_COMMAND})
 
 
 
