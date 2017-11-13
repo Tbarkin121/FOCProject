@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/stm32f4xx_it.h
+main.h
+../include/main.h
+
+/vagrant/src/stm32f4xx_it.c
+stm32f4xx_it.h
+/vagrant/src/stm32f4xx_it.h
+

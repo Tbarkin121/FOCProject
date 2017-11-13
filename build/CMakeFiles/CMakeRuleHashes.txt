@@ -1,0 +1,3 @@
+# Hashes of file build rules.
+079b52e9153bf0af6e824d9129b1ac6b CMakeFiles/burn
+cadeb3dd2ca41268c81ba31cdbf354f5 burn-command

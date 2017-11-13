@@ -1,0 +1,8 @@
+/vagrant/build/CMakeFiles/edit_cache.dir
+/vagrant/build/CMakeFiles/rebuild_cache.dir
+/vagrant/build/CMakeFiles/burn.dir
+/vagrant/build/CMakeFiles/foc.dir
+/vagrant/build/CMakeFiles/STARTUP.dir
+/vagrant/build/CMakeFiles/PROJECT.dir
+/vagrant/build/CMakeFiles/STM.dir
+/vagrant/build/CMakeFiles/FieldOrientedControl.dir

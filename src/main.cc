@@ -1,6 +1,5 @@
 #define USE_STDPERIPH_DRIVER
 #include "stm32f4xx.h"
-#include "test.h"
 
 //Quick hack, approximately 1ms delay
 void ms_delay(int ms)
