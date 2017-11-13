@@ -1,2 +1,0 @@
-/usr/bin/ar qc lib/libPROJECT.a  CMakeFiles/PROJECT.dir/src/stm32f4xx_it.c.o
-/usr/bin/ranlib lib/libPROJECT.a

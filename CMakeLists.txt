@@ -22,22 +22,22 @@ set(SCRIPTS_PATH ${CMAKE_SOURCE_DIR}/tools)
 set(STLINK_PATH ${SCRIPTS_PATH}/stlink/build/Release)
 
 set(STM_LIB_SOURCES
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_crc.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_iwdg.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rtc.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rtc_ex.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c
+        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
+        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c
+        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c
+        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_crc.c
+        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c
+        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c
+        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c
+        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c
+        ##${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c
+        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_iwdg.c
+        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rtc.c
+        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rtc_ex.c
+        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c
+        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c
+        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c
+        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c
         ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c
         )
 

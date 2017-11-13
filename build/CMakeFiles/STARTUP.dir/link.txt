@@ -1,2 +1,0 @@
-/usr/bin/ar cr lib/libSTARTUP.a  CMakeFiles/STARTUP.dir/src/startup_stm32f407xx.s.o 
-/usr/bin/ranlib lib/libSTARTUP.a 
