@@ -1,28 +1,33 @@
-#define USE_STDPERIPH_DRIVER
 #include "stm32f4xx.h"
+#include "include/gpio.h"
+#include "include/reset_and_clock_control.h"
 
-//Quick hack, approximately 1ms delay
-void ms_delay(int ms)
-{
-   while (ms-- > 0) {
-      volatile int x=5971;
-      while (x-- > 0)
-         __asm("nop");
-   }
-}
-
-
-
-//Flash orange LED at about 1hz
 int main(void)
 {
-    RCC->AHB1ENR |= RCC_AHB1ENR_GPIODEN;  // enable the clock to GPIOD
-    __asm("dsb");                         // stall instruction pipeline, until instruction completes, as
-                                          //    per Errata 2.1.13, "Delay after an RCC peripheral clock enabling"
-    GPIOD->MODER = (1 << 26);             // set pin 13 to be general purpose output
+    //__disable_irq();
+    ResetAndClockControl rcc;
+    // set the buck into normal operating mode.
+    BaseGPIOPin led1_base_pin(rcc, GPIOD, GPIO_PIN_12);
+    OutputPin led1_pin(led1_base_pin);
+    led1_pin.Initialize();
+    led1_pin.Set();
 
-    for (;;) {
-       ms_delay(10);
-       GPIOD->ODR ^= (1 << 13);           // Toggle the pin 
+    BaseGPIOPin led2_base_pin(rcc, GPIOD, GPIO_PIN_13);
+    OutputPin led2_pin(led2_base_pin);
+    led2_pin.Initialize();
+    led2_pin.Set();
+
+    BaseGPIOPin led3_base_pin(rcc, GPIOD, GPIO_PIN_14);
+    OutputPin led3_pin(led3_base_pin);
+    led3_pin.Initialize();
+    led3_pin.Set();
+
+    BaseGPIOPin led4_base_pin(rcc, GPIOD, GPIO_PIN_15);
+    OutputPin led4_pin(led4_base_pin);
+    led4_pin.Initialize();
+    led4_pin.Set();
+
+    while(1){
+
     }
 }

@@ -1,4 +1,3 @@
-
 #*********************************************************************
 # Copyright © Tyler Barkin – All Rights Reserved
 # Proprietary and Confidential
@@ -6,6 +5,7 @@
 # prohibited unless prior written permission is obtained from Tyler Barkin, Inc.
 # Created by Tyler Barkin, November 2017
 #*********************************************************************/
+
 cmake_minimum_required(VERSION 2.8)
 
 enable_language(ASM)
@@ -13,36 +13,46 @@ project(FieldOrientedControl)
 
 
 # Set the output folder where your program will be created
-set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/build)
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
-set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
+#set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/build)
+#set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
+#set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
 
 set(TOOLS_PATH /opt/tools)
 set(SCRIPTS_PATH ${CMAKE_SOURCE_DIR}/tools)
-set(STLINK_PATH ${SCRIPTS_PATH}/stlink/build/Release)
 
 set(STM_LIB_SOURCES
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_crc.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_iwdg.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rtc.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rtc_ex.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_crc.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_iwdg.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rtc.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rtc_ex.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/BSP/STM32F4-Discovery/stm32f4_discovery.c
         )
 
 set(STM_STARTUP_SOURCES
         ${CMAKE_SOURCE_DIR}/src/startup_stm32f407xx.s
+        )
+
+set(FreeRTOS_LIB_SOURCES
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party/FreeRTOS/Source/croutine.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party/FreeRTOS/Source/event_groups.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party/FreeRTOS/Source/list.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party/FreeRTOS/Source/queue.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party/FreeRTOS/Source/tasks.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party/FreeRTOS/Source/timers.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c
         )
 
 set(PROJECT_SOURCES
@@ -52,21 +62,26 @@ set(PROJECT_SOURCES
 set(PROJECT_LOW_LEVEL_SOURCES
 
         ${CMAKE_SOURCE_DIR}/src/stm32f4xx_it.c
+        ${CMAKE_SOURCE_DIR}/src/gpio.cc
+        ${CMAKE_SOURCE_DIR}/src/reset_and_clock_control.cc
         )
 
 set(MAIN_SOURCES
         ${CMAKE_SOURCE_DIR}/src/main.cc
+        ${CMAKE_SOURCE_DIR}/src/stm32f4xx_it.c
         )
 
 include_directories(
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/STM32F4xx_HAL_Driver/Inc
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Drivers/CMSIS/Include
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/STM32F4xx_HAL_Driver/Inc
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/CMSIS/Include
 
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Middlewares/Third_Party
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Middlewares/Third_Party/FreeRTOS/Source/include
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.17.0/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/BSP/STM32F4_Discovery
+
+        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party
+        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party/FreeRTOS/Source/include
+        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F
 
         ${CMAKE_SOURCE_DIR}/include
         ${CMAKE_SOURCE_DIR}
@@ -75,10 +90,10 @@ include_directories(
 
 
 
-set(CMAKE_C_COMPILER ${TOOLS_PATH}/gcc-arm-none-eabi.6.3.1/bin/arm-none-eabi-gcc)
-set(CMAKE_CXX_COMPILER ${TOOLS_PATH}/gcc-arm-none-eabi.6.3.1/bin/arm-none-eabi-g++)
-set(CMAKE_ASM_COMPILER ${TOOLS_PATH}/gcc-arm-none-eabi.6.3.1/bin/arm-none-eabi-as)
-set(GCOV ${TOOLS_PATH}/gcc-arm-none-eabi.6.3.1/bin/arm-none-eabi-gcov)
+set(CMAKE_C_COMPILER ${TOOLS_PATH}/gcc-arm-none-eabi-7-2017-q4-major/bin/arm-none-eabi-gcc)
+set(CMAKE_CXX_COMPILER ${TOOLS_PATH}/gcc-arm-none-eabi-7-2017-q4-major/bin/arm-none-eabi-g++)
+set(CMAKE_ASM_COMPILER ${TOOLS_PATH}/gcc-arm-none-eabi-7-2017-q4-major/bin/arm-none-eabi-as)
+set(GCOV ${TOOLS_PATH}/gcc-arm-none-eabi-7-2017-q4-major/bin/arm-none-eabi-gcov)
 # Processor flags
 set(GCC_PROCESSOR_FLAGS "-mcpu=cortex-m4 -mthumb")
 #  -mcpu=cortex-m4                      Processor type is ARM Cortex M4
@@ -165,27 +180,14 @@ set(CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS)
 #set(GCC_TARGET_LINK_SCRIPTS "-T mem.ld -T stack.ld -T sections.ld")
 set(GCC_TARGET_LINK_SCRIPTS "-T STM32F407VGTx_FLASH.ld")
 # For main build
+add_library(STM ${STM_LIB_SOURCES})
 add_library(STARTUP ${STM_STARTUP_SOURCES})
 add_library(PROJECT ${PROJECT_LOW_LEVEL_SOURCES} ${PROJECT_LIB_SOURCES})
-add_library(STM ${STM_LIB_SOURCES})
+# add_library(FreeRTOS ${FreeRTOS_LIB_SOURCES})
 
+# set_target_properties(FreeRTOS PROPERTIES COMPILE_FLAGS "-mfpu=fpv4-sp-d16 -mfloat-abi=softfp -DxPortSysTickHandler=SysTick_Handler")
 set_target_properties(PROJECT PROPERTIES COMPILE_FLAGS "${BOOST_SPECIFIC_DEFINES}")
 
-#Blinky
-#set(TEST_HW_BUILD blinky)
-#add_executable(${TEST_HW_BUILD} ${PROJECT_SOURCES_Debug} ${TEST_BLINKY_SOURCES})
-#target_link_libraries(${TEST_HW_BUILD} STARTUP)
-#target_link_libraries(${TEST_HW_BUILD} FreeRTOS_Debug)
-#target_link_libraries(${TEST_HW_BUILD} PROJECT)
-#target_link_libraries(${TEST_HW_BUILD} STM)
-#set_target_properties(${TEST_HW_BUILD} PROPERTIES LINK_FLAGS "${GCC_TARGET_LINK_SCRIPTS} -fprofile-arcs ${STM_SPECIFIC_DEBUG_DEFINES} -Wl,-Map,${TEST_HW_BUILD}.map")
-#set_target_properties(${TEST_HW_BUILD} PROPERTIES COMPILE_FLAGS "-mfpu=fpv4-sp-d16 ${STM_SPECIFIC_DEBUG_DEFINES}")
-#add_custom_command(OUTPUT openocd-test-hw-blinky-command
-#            COMMAND ${SCRIPTS_PATH}/ctswload.sh -b ${PROJECT_BINARY_DIR}/${TEST_HW_BUILD}
-#            DEPENDS ${TEST_HW_BUILD}
-#            COMMENT "Running blinky test"
-#            )
-#add_custom_target(app-blinky DEPENDS openocd-test-hw-blinky-command)
 
 # Application builds
 set(MAIN_BUILD ${CMAKE_PROJECT_NAME})
@@ -198,12 +200,12 @@ set_target_properties(${MAIN_BUILD} PROPERTIES LINK_FLAGS "${GCC_TARGET_LINK_SCR
 set_target_properties(${MAIN_BUILD} PROPERTIES COMPILE_FLAGS "-mfpu=fpv4-sp-d16")
 set(OPENOCD_COMMAND openocd-command-app-${build_type})
 add_custom_command(OUTPUT ${OPENOCD_COMMAND}
-    COMMAND ${SCRIPTS_PATH}/load.sh -b ${PROJECT_BINARY_DIR}/${MAIN_BUILD}
+    COMMAND ${SCRIPTS_PATH}/loadsw.sh -b ${PROJECT_BINARY_DIR}/${MAIN_BUILD}
     DEPENDS ${MAIN_BUILD}
     COMMENT "Running application"
     )
 set_source_files_properties(${OPENOCD_COMMAND} SYMBOLIC 1)
-add_custom_target(app} DEPENDS ${OPENOCD_COMMAND})
+add_custom_target(app DEPENDS ${OPENOCD_COMMAND})
 
 
 

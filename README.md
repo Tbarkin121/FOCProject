@@ -1,4 +1,5 @@
 "# FOCProject" 
+http://www.embedds.com/programming-stm32-discovery-using-gnu-tools-linker-script/
 https://geokon-gh.github.io/stm32f4/
 https://waldezlab.wordpress.com/2014/08/20/getting-started-with-the-stm32f4-discovery-ubuntu-14-04/
 https://gctechspace.org/2014/09/getting-to-blinky-with-the-stm32-and-ubuntu-linux/
@@ -45,3 +46,7 @@ sudo udevadm control --reload-rules
 
 more garbage (for openocd)
 sudo apt-get install libtool autoconf texinfo libusb-dev
+
+Interesting repos
+https://github.com/ObKo/stm32-cmake/blob/master/cmake/gcc_stm32f4.cmake
+https://github.com/charleskorn/stm32f4-project-template
