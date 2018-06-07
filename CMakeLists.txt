@@ -68,7 +68,10 @@ set(PROJECT_LOW_LEVEL_SOURCES
 
 set(MAIN_SOURCES
         ${CMAKE_SOURCE_DIR}/src/main.cc
-        ${CMAKE_SOURCE_DIR}/src/stm32f4xx_it.c
+        )
+
+set(PROJECT_LIB_SOURCES
+        ${CMAKE_SOURCE_DIR}/src/hardware.cc
         )
 
 include_directories(
@@ -199,14 +202,13 @@ target_link_libraries(${MAIN_BUILD} STM)
 set_target_properties(${MAIN_BUILD} PROPERTIES LINK_FLAGS "${GCC_TARGET_LINK_SCRIPTS} -fprofile-arcs -Wl,-Map,${MAIN_BUILD}.map")
 set_target_properties(${MAIN_BUILD} PROPERTIES COMPILE_FLAGS "-mfpu=fpv4-sp-d16")
 set(OPENOCD_COMMAND openocd-command-app-${build_type})
-add_custom_command(OUTPUT ${OPENOCD_COMMAND}
+add_custom_command(
+    OUTPUT ${OPENOCD_COMMAND}
     COMMAND ${SCRIPTS_PATH}/loadsw.sh -b ${PROJECT_BINARY_DIR}/${MAIN_BUILD}
     DEPENDS ${MAIN_BUILD}
     COMMENT "Running application"
     )
 set_source_files_properties(${OPENOCD_COMMAND} SYMBOLIC 1)
 add_custom_target(app DEPENDS ${OPENOCD_COMMAND})
-
-
 
 
