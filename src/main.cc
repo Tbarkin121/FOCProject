@@ -1,25 +1,15 @@
 #include "stm32f4xx.h"
 #include "include/gpio.h"
+#include "include/reset_and_clock_control.h"
 #include "include/hardware_factory.h"
-
-
-void delay_cycles(uint32_t cyclecount) {
-    volatile uint32_t spin_counter = 0;
-    while(1)
-    {
-        if (spin_counter == cyclecount) {
-            break;
-            } else {
-            spin_counter++;
-        }
-    }
-}
+#include "include/hardware_interface.h"
 
 int main(void)
 {
   HardwareFactory hardware_factory;
   // IHardware& hw = hardware_factory.GetHardware();
   // hw.Initialize();
+  // hw.Led1().Initialize();
   // hw.Led1().Set();
   // hw.Led2().Set();
   // hw.Led3().Set();
@@ -36,20 +26,14 @@ int main(void)
 
     while(1){
       // hw.Led1().Toggle();
-      // delay_cycles(1);
-      // // hw.Led2().Toggle();
-      // delay_cycles(1);
-      // // hw.Led3().Toggle();
-      // delay_cycles(1);
-      // // hw.Led4().Toggle();
-      // delay_cycles(10000);
+      // hw.Led2().Toggle();
+      // hw.Led3().Toggle();
+      // hw.Led4().Toggle();
       hardware_factory.led1_pin_.Toggle();
       hardware_factory.led2_pin_.Toggle();
       hardware_factory.led3_pin_.Toggle();
       hardware_factory.led4_pin_.Toggle();
-      // HAL_Delay(1);
-      //
-
+      HAL_Delay(1000);
     }
 
 }
