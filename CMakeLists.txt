@@ -71,6 +71,10 @@ set(MAIN_SOURCES
         ${CMAKE_SOURCE_DIR}/src/stm32f4xx_it.c
         )
 
+set(PROJECT_LIB_SOURCES
+    ${CMAKE_SOURCE_DIR}/src/hardware.cc
+    )
+
 include_directories(
         ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers
         ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/STM32F4xx_HAL_Driver/Inc
@@ -198,8 +202,9 @@ target_link_libraries(${MAIN_BUILD} PROJECT)
 target_link_libraries(${MAIN_BUILD} STM)
 set_target_properties(${MAIN_BUILD} PROPERTIES LINK_FLAGS "${GCC_TARGET_LINK_SCRIPTS} -fprofile-arcs -Wl,-Map,${MAIN_BUILD}.map")
 set_target_properties(${MAIN_BUILD} PROPERTIES COMPILE_FLAGS "-mfpu=fpv4-sp-d16")
-set(OPENOCD_COMMAND openocd-command-app-${build_type})
-add_custom_command(OUTPUT ${OPENOCD_COMMAND}
+set(OPENOCD_COMMAND openocd)
+add_custom_command(
+    OUTPUT ${OPENOCD_COMMAND}
     COMMAND ${SCRIPTS_PATH}/loadsw.sh -b ${PROJECT_BINARY_DIR}/${MAIN_BUILD}
     DEPENDS ${MAIN_BUILD}
     COMMENT "Running application"
