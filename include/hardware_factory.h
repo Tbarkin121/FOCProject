@@ -10,7 +10,7 @@
 #ifndef INCLUDE_HARDWARE_FACTORY_H_
 #define INCLUDE_HARDWARE_FACTORY_H_
 
-#include "include/hardware.h"
+// #include "include/hardware.h"
 #include "include/reset_and_clock_control.h"
 #include "include/gpio.h"
 
@@ -26,17 +26,17 @@ class HardwareFactory {
         led1_pin_(led1_base_pin_),
         led2_pin_(led2_base_pin_),
         led3_pin_(led3_base_pin_),
-        led4_pin_(led4_base_pin_),
+        led4_pin_(led4_base_pin_) {}
         
-        hw_(rcc_,
-        led1_pin_,
-        led2_pin_,
-        led3_pin_,
-        led4_pin_) {}
+        // hw_(rcc_,
+        // led1_pin_,
+        // led2_pin_,
+        // led3_pin_,
+        // led4_pin_) {}
 
-    IHardware& GetHardware() { return hw_; }
+    // IHardware& GetHardware() { return hw_; }
 
- private:
+ // private:
     // System Level
     ResetAndClockControl rcc_;
 
@@ -52,7 +52,7 @@ class HardwareFactory {
     OutputPin led4_pin_;
 
 
-    Hardware hw_;
+    // Hardware hw_;
 };
 
 #endif  // INCLUDE_HARDWARE_FACTORY_H_

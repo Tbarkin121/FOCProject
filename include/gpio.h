@@ -44,7 +44,8 @@ class BaseGPIOPin : public IGPIO {
 //-----------------------------------------------------------------------------
 class OutputPin : public IOutputPin {
  public:
-        explicit OutputPin(const IGPIO& gpio) : gpio_(gpio) {}
+        explicit OutputPin(const IGPIO& gpio, bool pin_state = false)
+        : gpio_(gpio), pin_state_(pin_state) {}
         std::error_code Initialize() const;
         void Set() const;
         void Clear() const;
@@ -53,17 +54,7 @@ class OutputPin : public IOutputPin {
 
  protected:
         const IGPIO& gpio_;
-};
-
-//-----------------------------------------------------------------------------
-class DummyOutputPin : public IOutputPin {
- public:
-        DummyOutputPin() {}
-        std::error_code Initialize() const { return std::error_code(); }
-        void Set() const {}
-        void Clear() const {}
-        void Toggle() const {}
-        bool Query() const { return true; }
+        bool pin_state_;
 };
 
 //-----------------------------------------------------------------------------

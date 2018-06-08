@@ -72,6 +72,11 @@ std::error_code OutputPin::Initialize() const {
     gpio_config.Pull = GPIO_NOPULL;
     gpio_config.Speed = GPIO_SPEED_HIGH;
 
+    if ( pin_state_ ) {
+        HAL_GPIO_WritePin(gpio_.Port(), gpio_.Pin(), GPIO_PIN_SET);
+    } else {
+        HAL_GPIO_WritePin(gpio_.Port(), gpio_.Pin(), GPIO_PIN_RESET);
+    }
     return gpio_.Initialize(gpio_config);
 }
 

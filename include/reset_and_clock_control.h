@@ -20,8 +20,9 @@ class ResetAndClockControl : public IResetAndClockControl {
         void InitializeHardware() const;
         ResetSource GetResetSource() const;
         void ClearResetSource() const;
-        static uint32_t APB1FrequencyHz() { return apb1_frequency_hz_; }
-        static uint32_t APB2FrequencyHz() { return apb2_frequency_hz_; }
+        static uint32_t APB1TimerFrequencyHz() { return apb1_timer_frequency_hz_; }
+        static uint32_t APB2TimerFrequencyHz() { return apb2_timer_frequency_hz_; }
+        static void EnableRTCClock();
 
  protected:
         void SystemClockConfig() const;
@@ -29,11 +30,10 @@ class ResetAndClockControl : public IResetAndClockControl {
         void InitializeBusClocks() const;
         void InitializeSysTick() const;
         void EnablePeripheralClocks() const;
-        void EnableRTCClock() const;
         void EnableCRCClock() const;
 
-        static uint32_t apb1_frequency_hz_;
-        static uint32_t apb2_frequency_hz_;
+        static uint32_t apb1_timer_frequency_hz_;
+        static uint32_t apb2_timer_frequency_hz_;
         static bool initialized_;
 };
 

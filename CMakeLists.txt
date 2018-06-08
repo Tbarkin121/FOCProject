@@ -45,15 +45,15 @@ set(STM_STARTUP_SOURCES
         ${CMAKE_SOURCE_DIR}/src/startup_stm32f407xx.s
         )
 
-set(FreeRTOS_LIB_SOURCES
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party/FreeRTOS/Source/croutine.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party/FreeRTOS/Source/event_groups.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party/FreeRTOS/Source/list.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party/FreeRTOS/Source/queue.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party/FreeRTOS/Source/tasks.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party/FreeRTOS/Source/timers.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c
-        )
+# set(FreeRTOS_LIB_SOURCES
+#         ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party/FreeRTOS/Source/croutine.c
+#         ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party/FreeRTOS/Source/event_groups.c
+#         ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party/FreeRTOS/Source/list.c
+#         ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party/FreeRTOS/Source/queue.c
+#         ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party/FreeRTOS/Source/tasks.c
+#         ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party/FreeRTOS/Source/timers.c
+#         ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c
+#         )
 
 set(PROJECT_SOURCES
         ${CMAKE_SOURCE_DIR}/src/system.cc
@@ -64,6 +64,7 @@ set(PROJECT_LOW_LEVEL_SOURCES
         ${CMAKE_SOURCE_DIR}/src/stm32f4xx_it.c
         ${CMAKE_SOURCE_DIR}/src/gpio.cc
         ${CMAKE_SOURCE_DIR}/src/reset_and_clock_control.cc
+        
         )
 
 set(MAIN_SOURCES
@@ -82,9 +83,9 @@ include_directories(
 
         ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/BSP/STM32F4_Discovery
 
-        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party
-        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party/FreeRTOS/Source/include
-        #${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F
+        # ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party
+        # ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party/FreeRTOS/Source/include
+        # ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F
 
         ${CMAKE_SOURCE_DIR}/include
         ${CMAKE_SOURCE_DIR}
@@ -112,9 +113,9 @@ set(GCC_C_FLAGS "-std=gnu11")
 #  -std=gnu11                           Allow the gnu extensions with C11
 
 # C++ Software Version macro
-if(DEFINED ENV{BUILD_NUMBER})
-    set(SW_VERSION_MACRO "--sw_version=$ENV{BUILD_NUMBER}")
-endif()
+#if(DEFINED ENV{BUILD_NUMBER})
+#    set(SW_VERSION_MACRO "--sw_version=$ENV{BUILD_NUMBER}")
+#endif()
 
 # C++ Option flags
 set(GCC_CPP_FLAGS "-fabi-version=0 -fno-exceptions -fno-use-cxa-atexit -fno-threadsafe-statics -std=gnu++11")
@@ -189,7 +190,7 @@ add_library(PROJECT ${PROJECT_LOW_LEVEL_SOURCES} ${PROJECT_LIB_SOURCES})
 # add_library(FreeRTOS ${FreeRTOS_LIB_SOURCES})
 
 # set_target_properties(FreeRTOS PROPERTIES COMPILE_FLAGS "-mfpu=fpv4-sp-d16 -mfloat-abi=softfp -DxPortSysTickHandler=SysTick_Handler")
-set_target_properties(PROJECT PROPERTIES COMPILE_FLAGS "${BOOST_SPECIFIC_DEFINES}")
+# set_target_properties(PROJECT PROPERTIES COMPILE_FLAGS "${BOOST_SPECIFIC_DEFINES}")
 
 
 # Application builds

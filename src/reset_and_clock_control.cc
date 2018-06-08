@@ -105,14 +105,14 @@ void ResetAndClockControl::InitializeBusClocks() const {
     // The frequency must not exceed 90MHz
     // APB2 = fPLLoutput / APB2CLKDivider
     // APB2 = 168MHz / 2
-    // APB2 = 84MHz
+    // APB2 = 84MHz peripherals / 168 MHz timers (x2 multiplier on timers)
 
     // APB Low Speed Prescaler (APB1)
     // APB1CLKDivider = 4
     // The frequency must not exceed 45MHz
     // APB1 = fPLLoutput / APB1CLKDivider
     // APB1 = 168MHz / 4
-    // APB1 = 42MHz
+    // APB1 = 42MHz peripherals / 84 MHz timers (x2 multiplier on timers)
 
     // AHB Prescaler
     // AHBCLKDivider = 1
@@ -137,8 +137,8 @@ void ResetAndClockControl::InitializeBusClocks() const {
     // Set the appropriate constants here, based on the above calculations.
     // We are doing this manually as we are not using a calculator function
     // or macro above, so ensure this matches the comments if it ever changes
-    apb1_frequency_hz_ = 42000000;  // 42 MHz
-    apb2_frequency_hz_ = 84000000;  // 84 MHz
+    apb1_timer_frequency_hz_ = 84000000;  // 84 MHz
+    apb2_timer_frequency_hz_ = 168000000;  // 168 MHz
 }
 
 //-----------------------------------------------------------------------------
@@ -166,13 +166,15 @@ void ResetAndClockControl::EnablePeripheralClocks() const {
     __HAL_RCC_TIM4_CLK_ENABLE();   // Encoder
     __HAL_RCC_TIM5_CLK_ENABLE();
     __HAL_RCC_TIM8_CLK_ENABLE();
+    __HAL_RCC_USART2_CLK_ENABLE();
     __HAL_RCC_USART3_CLK_ENABLE();
+    __HAL_RCC_USART6_CLK_ENABLE();
     __HAL_RCC_SPI3_CLK_ENABLE();
     __HAL_RCC_MCO1_CONFIG(RCC_MCO1SOURCE_HSE, RCC_MCODIV_1);
 }
 
 //-----------------------------------------------------------------------------
-void ResetAndClockControl::EnableRTCClock() const {
+void ResetAndClockControl::EnableRTCClock() {
     // After reset, the backup domain (RTC registers, RTC backup data
     // registers and backup SRAM) is protected against possible unwanted write
     // accesses.
@@ -228,6 +230,6 @@ void ResetAndClockControl::ClearResetSource() const {
 }
 
 //-----------------------------------------------------------------------------
-uint32_t ResetAndClockControl::apb1_frequency_hz_;
-uint32_t ResetAndClockControl::apb2_frequency_hz_;
+uint32_t ResetAndClockControl::apb1_timer_frequency_hz_;
+uint32_t ResetAndClockControl::apb2_timer_frequency_hz_;
 bool ResetAndClockControl::initialized_;
