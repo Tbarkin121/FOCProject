@@ -57,6 +57,7 @@ set(FreeRTOS_LIB_SOURCES
 
 set(PROJECT_SOURCES
         ${CMAKE_SOURCE_DIR}/src/system.cc
+        ${CMAKE_SOURCE_DIR}/src/freertos_tasks.c
         )
 
 set(PROJECT_LOW_LEVEL_SOURCES
@@ -64,6 +65,8 @@ set(PROJECT_LOW_LEVEL_SOURCES
         ${CMAKE_SOURCE_DIR}/src/stm32f4xx_it.c
         ${CMAKE_SOURCE_DIR}/src/gpio.cc
         ${CMAKE_SOURCE_DIR}/src/reset_and_clock_control.cc
+        ${CMAKE_SOURCE_DIR}/src/rtos_task.cc
+        ${CMAKE_SOURCE_DIR}/src/rtos_queue.cc
         
         )
 
@@ -84,9 +87,9 @@ include_directories(
 
         ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/BSP/STM32F4_Discovery
 
-        # ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party
-        # ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party/FreeRTOS/Source/include
-        # ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party/FreeRTOS/Source/include
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F
 
         ${CMAKE_SOURCE_DIR}/include
         ${CMAKE_SOURCE_DIR}
@@ -184,13 +187,14 @@ set(CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS)
 
 #set(GCC_TARGET_LINK_SCRIPTS "-T mem.ld -T stack.ld -T sections.ld")
 set(GCC_TARGET_LINK_SCRIPTS "-T STM32F407VGTx_FLASH.ld")
+set(GCC_TARGET_FREERTOS_LINK_SCRIPTS "-T STM32F407VGTx_FLASH.ld")
 # For main build
 add_library(STM ${STM_LIB_SOURCES})
 add_library(STARTUP ${STM_STARTUP_SOURCES})
 add_library(PROJECT ${PROJECT_LOW_LEVEL_SOURCES} ${PROJECT_LIB_SOURCES})
-# add_library(FreeRTOS ${FreeRTOS_LIB_SOURCES})
+add_library(FreeRTOS ${FreeRTOS_LIB_SOURCES})
 
-# set_target_properties(FreeRTOS PROPERTIES COMPILE_FLAGS "-mfpu=fpv4-sp-d16 -mfloat-abi=softfp -DxPortSysTickHandler=SysTick_Handler")
+set_target_properties(FreeRTOS PROPERTIES COMPILE_FLAGS "-mfpu=fpv4-sp-d16 -mfloat-abi=softfp -DxPortSysTickHandler=SysTick_Handler")
 set_target_properties(PROJECT PROPERTIES COMPILE_FLAGS "${BOOST_SPECIFIC_DEFINES}")
 
 
@@ -198,10 +202,11 @@ set_target_properties(PROJECT PROPERTIES COMPILE_FLAGS "${BOOST_SPECIFIC_DEFINES
 set(MAIN_BUILD ${CMAKE_PROJECT_NAME})
 add_executable(${MAIN_BUILD} ${PROJECT_SOURCES} ${MAIN_SOURCES})
 target_link_libraries(${MAIN_BUILD} STARTUP)
-#target_link_libraries(${MAIN_BUILD} FreeRTOS)
+target_link_libraries(${MAIN_BUILD} FreeRTOS)
 target_link_libraries(${MAIN_BUILD} PROJECT)
 target_link_libraries(${MAIN_BUILD} STM)
-set_target_properties(${MAIN_BUILD} PROPERTIES LINK_FLAGS "${GCC_TARGET_LINK_SCRIPTS} -fprofile-arcs -Wl,-Map,${MAIN_BUILD}.map")
+#set_target_properties(${MAIN_BUILD} PROPERTIES LINK_FLAGS "${GCC_TARGET_LINK_SCRIPTS} -fprofile-arcs -Wl,-Map,${MAIN_BUILD}.map")
+set_target_properties(${MAIN_BUILD} PROPERTIES LINK_FLAGS "${GCC_TARGET_FREERTOS_LINK_SCRIPTS} -fprofile-arcs -Wl,-Map,${MAIN_BUILD}.map")
 set_target_properties(${MAIN_BUILD} PROPERTIES COMPILE_FLAGS "-mfpu=fpv4-sp-d16")
 set(OPENOCD_COMMAND openocd)
 add_custom_command(

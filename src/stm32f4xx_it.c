@@ -125,8 +125,7 @@ void UsageFault_Handler(void)
   * @param  None
   * @retval None
   */
-void SVC_Handler(void)
-{
+void __attribute__((weak)) SVC_Handler(void) {
 }
 
 /**
@@ -143,18 +142,20 @@ void DebugMon_Handler(void)
   * @param  None
   * @retval None
   */
-void PendSV_Handler(void)
-{
+void __attribute__((weak)) PendSV_Handler(void) {
 }
 
+// Forward declaration for the FreeRTOS tick hook function
+void vApplicationTickHook();
 /**
   * @brief  This function handles SysTick Handler.
   * @param  None
   * @retval None
   */
-void SysTick_Handler(void)
-{
-  HAL_IncTick();
+void __attribute__((weak)) SysTick_Handler(void) {
+    // This SysTick_Handler is used only when FreeRTOS is not being used. The
+    // call below emulates the FreeRTOS tick hook functionality.
+    vApplicationTickHook();
 }
 
 /******************************************************************************/

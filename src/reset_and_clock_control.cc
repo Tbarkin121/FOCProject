@@ -82,9 +82,7 @@ void ResetAndClockControl::InitializeOscillators() const {
 
     RCC_OscInitTypeDef RCC_OscInitStruct;
 
-    RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE |
-                                       RCC_OSCILLATORTYPE_LSE |
-                                       RCC_OSCILLATORTYPE_LSI;
+    RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
     RCC_OscInitStruct.LSIState = RCC_LSI_ON;
     RCC_OscInitStruct.LSEState = RCC_LSE_ON;
     RCC_OscInitStruct.HSEState = RCC_HSE_ON;
