@@ -154,18 +154,18 @@ void ResetAndClockControl::EnablePeripheralClocks() const {
     __HAL_RCC_GPIOC_CLK_ENABLE();  // Motor Control En/Dis
     __HAL_RCC_GPIOD_CLK_ENABLE();  // Encoder
     __HAL_RCC_GPIOE_CLK_ENABLE();  // Capacitor Bank Enable; motor enable
-    __HAL_RCC_GPIOF_CLK_ENABLE();  // Buttons; watchdog
-    __HAL_RCC_GPIOG_CLK_ENABLE();  // Buttons; watchdog
-    __HAL_RCC_GPIOI_CLK_ENABLE();  // charger status line
+    // __HAL_RCC_GPIOF_CLK_ENABLE();  // Buttons; watchdog
+    // __HAL_RCC_GPIOG_CLK_ENABLE();  // Buttons; watchdog
+    // __HAL_RCC_GPIOI_CLK_ENABLE();  // charger status line
     __HAL_RCC_I2C1_CLK_ENABLE();
     __HAL_RCC_TIM1_CLK_ENABLE();   // PWM
     __HAL_RCC_TIM2_CLK_ENABLE();
     __HAL_RCC_TIM3_CLK_ENABLE();
     __HAL_RCC_TIM4_CLK_ENABLE();   // Encoder
     __HAL_RCC_TIM5_CLK_ENABLE();
-    __HAL_RCC_TIM8_CLK_ENABLE();
+    // __HAL_RCC_TIM8_CLK_ENABLE();
     __HAL_RCC_USART2_CLK_ENABLE();
-    __HAL_RCC_USART3_CLK_ENABLE();
+    // __HAL_RCC_USART3_CLK_ENABLE();
     __HAL_RCC_USART6_CLK_ENABLE();
     __HAL_RCC_SPI3_CLK_ENABLE();
     __HAL_RCC_MCO1_CONFIG(RCC_MCO1SOURCE_HSE, RCC_MCODIV_1);

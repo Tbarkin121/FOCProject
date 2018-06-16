@@ -26,6 +26,7 @@ static StaticTask_t timer_control_task_tcb;
 static StackType_t timer_control_task_stack[TIMER_CONTROL_STACK_SIZE];
 static TaskHandle_t timer_control_task_handle;
 
+
 int main(void)
 {
   HardwareFactory hardware_factory;
