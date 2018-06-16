@@ -39,13 +39,13 @@ set(STM_LIB_SOURCES
         ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c
         ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c
         #${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/BSP/STM32F4-Discovery/stm32f4_discovery.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/BSP/STM32F411E-Discovery/stm32f411e_discovery.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/BSP/STM32F4xx-Nucleo/stm32f4xx_nucleo.c
         
         )
 
 set(STM_STARTUP_SOURCES
         #${CMAKE_SOURCE_DIR}/src/startup_stm32f407xx.s
-        ${CMAKE_SOURCE_DIR}/src/startup_stm32f411xe.s
+        ${CMAKE_SOURCE_DIR}/src/startup_stm32f401xe.s
         )
 
 set(FreeRTOS_LIB_SOURCES
@@ -89,7 +89,7 @@ include_directories(
         ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/CMSIS/Include
 
         #${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/BSP/STM32F4_Discovery
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/BSP/STM32F411E-Discovery
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/BSP/STM32F4xx-Nucleo
 
         ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party
         ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party/FreeRTOS/Source/include
@@ -154,7 +154,7 @@ set(GCC_DEBUG_FLAGS "-g3")
 
 # STM32F Specific definitions
 #set(STM_SPECIFIC_DEFINES "-DSTM32F407xx -DUSE_HAL_DRIVER -DHSE_VALUE=8000000")
-set(STM_SPECIFIC_DEFINES "-DSTM32F411xE -DUSE_HAL_DRIVER -DHSE_VALUE=8000000")
+set(STM_SPECIFIC_DEFINES "-DSTM32F401xE -DUSE_HAL_DRIVER -DHSE_VALUE=8000000")
 #  -DSTM32F417xx                        Defines the processor to be STM32F407xx
 #  -DUSE_HAL_DRIVER                     Use the provided hardware abstraction layer drivers instead of direct register access
 #  -DHSE_VALUE=8000000                  Set crystal frequency to 8MHz
