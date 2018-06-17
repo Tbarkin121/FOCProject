@@ -8,6 +8,7 @@ static ResetAndClockControl rcc;
 
 int main(void)
 {
+  rcc.InitializeHardware();
   HardwareFactory hardware_factory;
   IHardware& hw = hardware_factory.GetHardware();
   hw.Initialize();
@@ -15,10 +16,6 @@ int main(void)
   hw.Led2().Set();
   hw.Led3().Set();
   hw.Led4().Set();
-
- 
-
-    rcc.InitializeHardware();
 
 
 
@@ -28,12 +25,7 @@ int main(void)
     to be created.  See the memory management section on the FreeRTOS web site
     for more details. */
     while(1){
-      hw.Led1().Toggle();
-      hw.Led2().Toggle();
-      hw.Led3().Toggle();
-      hw.Led4().Toggle();
-
-      HAL_Delay(1000);
+      
     }
 
 }

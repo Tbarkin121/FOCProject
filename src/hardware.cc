@@ -16,10 +16,6 @@
 std::error_code Hardware::Initialize() const {
 	led1_.Initialize();
 	led2_.Initialize();
-	led3_.Initialize();
-	led4_.Initialize();
-	led1_.Set();
-	led2_.Clear();
     return std::error_code();
 }
 
