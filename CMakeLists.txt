@@ -72,7 +72,7 @@ set(PROJECT_LOW_LEVEL_SOURCES
         #${CMAKE_SOURCE_DIR}/src/adc.cc
         #${CMAKE_SOURCE_DIR}/src/can.cc
         #${CMAKE_SOURCE_DIR}/src/i2c.cc
-        #${CMAKE_SOURCE_DIR}/src/pwm.cc
+        ${CMAKE_SOURCE_DIR}/src/pwm.cc
         #${CMAKE_SOURCE_DIR}/src/spi.cc
         #${CMAKE_SOURCE_DIR}/src/timer.cc
         #${CMAKE_SOURCE_DIR}/src/uart.cc

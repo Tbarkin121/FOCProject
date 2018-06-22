@@ -14,7 +14,7 @@
 #include "include/reset_and_clock_control.h"
 #include "include/gpio.h"
 #include "include/simple_led_notifier.h"
-
+#include "include/pwm.h"
 
 class HardwareFactory {
  public:
@@ -42,6 +42,9 @@ class HardwareFactory {
             &led4_pin_
         }),
 
+        // PWM
+        led4_pwm_(rcc_, led4_base_pin_),
+
         hw_(rcc_,
             led1_pin_,
             led2_pin_,
@@ -50,7 +53,8 @@ class HardwareFactory {
         led1_notifier_,
         led2_notifier_,
         led3_notifier_,
-        led4_notifier_) {}
+        led4_notifier_,
+        led4_pwm_) {}
 
     IHardware& GetHardware() { return hw_; }
 
@@ -73,6 +77,9 @@ class HardwareFactory {
     SimpleLedNotifier led2_notifier_;
     SimpleLedNotifier led3_notifier_;
     SimpleLedNotifier led4_notifier_;
+
+    // PWM
+    PWM led4_pwm_;
 
     Hardware hw_;
 };

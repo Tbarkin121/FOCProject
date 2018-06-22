@@ -15,6 +15,7 @@
 #include "include/gpio_interface.h"
 #include "include/reset_and_clock_control_interface.h"
 #include "include/led_notifier_interface.h"
+#include "include/pwm_interface.h"
 
 class Hardware : public IHardware {
  public:
@@ -26,7 +27,8 @@ class Hardware : public IHardware {
                  const ILedNotifier& led1_notifier,
                  const ILedNotifier& led2_notifier,
                  const ILedNotifier& led3_notifier,
-                 const ILedNotifier& led4_notifier)
+                 const ILedNotifier& led4_notifier,
+                 const IPWM& led4_pwm)
                  : rcc_(rcc),
                    led1_(led1),
                    led2_(led2),
@@ -35,7 +37,8 @@ class Hardware : public IHardware {
                    led1_notifier_(led1_notifier),
                    led2_notifier_(led2_notifier),
                    led3_notifier_(led3_notifier),
-                   led4_notifier_(led4_notifier) {}
+                   led4_notifier_(led4_notifier),
+                   led4_pwm_(led4_pwm) {}
 
         std::error_code Initialize() const;
         const IResetAndClockControl& ResetAndClockControl() const { return rcc_; }
@@ -47,6 +50,7 @@ class Hardware : public IHardware {
         const ILedNotifier& Led2Notifier() const { return led2_notifier_; }
         const ILedNotifier& Led3Notifier() const { return led3_notifier_; }
         const ILedNotifier& Led4Notifier() const { return led4_notifier_; }
+        const IPWM& Led4PWM() const { return led4_pwm_; }
 
  protected:
         const IResetAndClockControl& rcc_;
@@ -58,6 +62,7 @@ class Hardware : public IHardware {
         const ILedNotifier& led2_notifier_;
         const ILedNotifier& led3_notifier_;
         const ILedNotifier& led4_notifier_;
+        const IPWM& led4_pwm_;
 };
 
 #endif  // INCLUDE_HARDWARE_H_

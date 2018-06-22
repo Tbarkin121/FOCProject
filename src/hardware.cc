@@ -22,8 +22,17 @@ std::error_code Hardware::Initialize() const {
 	led1_notifier_.Initialize();
 	led2_notifier_.Initialize();
 	led3_notifier_.Initialize();
-	led4_notifier_.Initialize();
-	
+	// led4_notifier_.Initialize();
+
+	IPWM::PWMConfig pwm_config_ = {
+    .frequency_hz     =  1000,
+    .min_duty_cycle   =  0.0f,
+    .max_duty_cycle   =  1.0f,
+    .min_output_value =  0.0f,  
+    .max_output_value =  1.0f
+	};
+	led4_pwm_.Initialize(pwm_config_);
+
 	return std::error_code();
 }
 

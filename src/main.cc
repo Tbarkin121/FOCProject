@@ -59,7 +59,8 @@ int main(void)
     hw.Led1Notifier().On();
     hw.Led2Notifier().On();
     hw.Led3Notifier().On();
-    hw.Led4Notifier().On();
+    // hw.Led4Notifier().On();
+    hw.Led4PWM().SetOutput(0.5);
     // Start the scheduler
     vTaskStartScheduler();
 
@@ -72,8 +73,8 @@ int main(void)
       hw.Led1().Set();
       hw.Led2().Clear();
       hw.Led3().Clear();
-      hw.Led4().Set();
-
+      // hw.Led4().Set();
+      hw.Led4PWM().SetOutput(0.5);
     }
 
 }
@@ -126,13 +127,15 @@ static void led_control_task(void *parameters) {
                 hw.Led1Notifier().On();
                 hw.Led2Notifier().Off();
                 hw.Led3().Set();
-                hw.Led4().Clear();
+                // hw.Led4().Clear();
+                hw.Led4PWM().SetOutput(0.5);
             }
             if (event_bits & LED_OFF_EVENT_BIT) {
                 hw.Led1Notifier().Off();
                 hw.Led2Notifier().On();
                 hw.Led3().Clear();
-                hw.Led4().Set();
+                // hw.Led4().Set();
+                hw.Led4PWM().SetOutput(0.5);
             }
         }
     }
