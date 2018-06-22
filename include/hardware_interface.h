@@ -15,6 +15,7 @@
 
 class IResetAndClockControl;
 class IOutputPin;
+class ILedNotifier;
 
 class IHardware {
  public:
@@ -25,6 +26,10 @@ class IHardware {
         virtual const IOutputPin& Led2() const = 0;
         virtual const IOutputPin& Led3() const = 0;
         virtual const IOutputPin& Led4() const = 0;
+        virtual const ILedNotifier& Led1Notifier() const = 0;
+        virtual const ILedNotifier& Led2Notifier() const = 0;
+        virtual const ILedNotifier& Led3Notifier() const = 0;
+        virtual const ILedNotifier& Led4Notifier() const = 0;
 };
 
 #endif  // INCLUDE_HARDWARE_INTERFACE_H_

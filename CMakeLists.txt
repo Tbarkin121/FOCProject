@@ -23,6 +23,7 @@ set(SCRIPTS_PATH ${CMAKE_SOURCE_DIR}/tools)
 set(STM_LIB_SOURCES
         ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
         ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c
+        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_can.c
         ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c
         ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_crc.c
         ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c
@@ -67,6 +68,16 @@ set(PROJECT_LOW_LEVEL_SOURCES
         ${CMAKE_SOURCE_DIR}/src/reset_and_clock_control.cc
         ${CMAKE_SOURCE_DIR}/src/rtos_task.cc
         ${CMAKE_SOURCE_DIR}/src/rtos_queue.cc
+
+        #${CMAKE_SOURCE_DIR}/src/adc.cc
+        #${CMAKE_SOURCE_DIR}/src/can.cc
+        #${CMAKE_SOURCE_DIR}/src/i2c.cc
+        #${CMAKE_SOURCE_DIR}/src/pwm.cc
+        #${CMAKE_SOURCE_DIR}/src/spi.cc
+        #${CMAKE_SOURCE_DIR}/src/timer.cc
+        #${CMAKE_SOURCE_DIR}/src/uart.cc
+
+
         
         )
 
@@ -77,6 +88,8 @@ set(MAIN_SOURCES
 
 set(PROJECT_LIB_SOURCES
         ${CMAKE_SOURCE_DIR}/src/hardware.cc
+        ${CMAKE_SOURCE_DIR}/src/simple_led_notifier.cc
+        ${CMAKE_SOURCE_DIR}/src/error_categories.cc
         )
 
 include_directories(

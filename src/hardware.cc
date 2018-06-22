@@ -14,13 +14,17 @@
 
 
 std::error_code Hardware::Initialize() const {
-	led1_.Initialize();
-	led2_.Initialize();
-	led3_.Initialize();
-	led4_.Initialize();
-	led1_.Set();
-	led2_.Clear();
-    return std::error_code();
+	//led1_.Initialize();
+    //led2_.Initialize();
+    //led3_.Initialize();
+    //led4_.Initialize();
+
+	led1_notifier_.Initialize();
+	led2_notifier_.Initialize();
+	led3_notifier_.Initialize();
+	led4_notifier_.Initialize();
+	
+	return std::error_code();
 }
 
 // void Hardware::Fault(const std::error_code& fault) const {

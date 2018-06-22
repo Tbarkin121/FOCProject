@@ -26,16 +26,9 @@ static StaticTask_t timer_control_task_tcb;
 static StackType_t timer_control_task_stack[TIMER_CONTROL_STACK_SIZE];
 static TaskHandle_t timer_control_task_handle;
 
+HardwareFactory hardware_factory;
 int main(void)
 {
-  HardwareFactory hardware_factory;
-  IHardware& hw = hardware_factory.GetHardware();
-  hw.Initialize();
-  hw.Led1().Clear();
-  hw.Led2().Clear();
-  hw.Led3().Clear();
-  hw.Led4().Clear();
-
   // Spawn the task that controls LED timing
     timer_control_task_handle = xTaskCreateStatic(
         timer_control_task,
@@ -61,7 +54,12 @@ int main(void)
     led_control_event_group_handle = xEventGroupCreateStatic(&led_control_event_group);
 
     rcc.InitializeHardware();
-
+    IHardware& hw = hardware_factory.GetHardware();
+    hw.Initialize();
+    hw.Led1Notifier().On();
+    hw.Led2Notifier().On();
+    hw.Led3Notifier().On();
+    hw.Led4Notifier().On();
     // Start the scheduler
     vTaskStartScheduler();
 
@@ -71,12 +69,11 @@ int main(void)
     to be created.  See the memory management section on the FreeRTOS web site
     for more details. */
     while(1){
-      hw.Led1().Toggle();
-      hw.Led2().Toggle();
-      hw.Led3().Toggle();
-      hw.Led4().Toggle();
+      hw.Led1().Set();
+      hw.Led2().Clear();
+      hw.Led3().Clear();
+      hw.Led4().Set();
 
-      HAL_Delay(1000);
     }
 
 }
@@ -110,7 +107,6 @@ static void timer_control_task(void *parameters) {
 // Waits for events from the timer_control_task and turns the LED
 // on/off on when requested.
 static void led_control_task(void *parameters) {
-    HardwareFactory hardware_factory;
     IHardware& hw = hardware_factory.GetHardware();
     hw.Initialize();
     bool blink_led = true;
@@ -127,16 +123,16 @@ static void led_control_task(void *parameters) {
 
         if (blink_led) {
             if (event_bits & LED_ON_EVENT_BIT) {
-                hw.Led1().Set();
-                hw.Led2().Set();
+                hw.Led1Notifier().On();
+                hw.Led2Notifier().Off();
                 hw.Led3().Set();
-                hw.Led4().Set();
+                hw.Led4().Clear();
             }
             if (event_bits & LED_OFF_EVENT_BIT) {
-                hw.Led1().Clear();
-                hw.Led2().Clear();
+                hw.Led1Notifier().Off();
+                hw.Led2Notifier().On();
                 hw.Led3().Clear();
-                hw.Led4().Clear();
+                hw.Led4().Set();
             }
         }
     }
