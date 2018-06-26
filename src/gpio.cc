@@ -47,8 +47,8 @@ GPIO_InitTypeDef BaseGPIOPin::GetAlternatePushPullConfiguration(uint32_t alterna
     GPIO_InitTypeDef gpio_config;
 
     gpio_config.Mode = GPIO_MODE_AF_PP;
-    gpio_config.Pull = GPIO_PULLUP;
-    gpio_config.Speed = GPIO_SPEED_HIGH;
+    gpio_config.Pull = GPIO_NOPULL;
+    gpio_config.Speed = GPIO_SPEED_FREQ_LOW;
     gpio_config.Alternate = alternate;
 
     return gpio_config;

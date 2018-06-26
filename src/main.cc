@@ -12,6 +12,7 @@ static ResetAndClockControl rcc;
 
 static void led_control_task(void *parameters);
 static void timer_control_task(void *parameters);
+static void dimmer_control_task(void *parameters);
 
 static EventGroupHandle_t led_control_event_group_handle;
 static StaticEventGroup_t led_control_event_group;
@@ -26,7 +27,15 @@ static StaticTask_t timer_control_task_tcb;
 static StackType_t timer_control_task_stack[TIMER_CONTROL_STACK_SIZE];
 static TaskHandle_t timer_control_task_handle;
 
+#define DIMMER_CONTROL_STACK_SIZE 128
+static StaticTask_t dimmer_control_task_tcb;
+static StackType_t dimmer_control_task_stack[DIMMER_CONTROL_STACK_SIZE];
+static TaskHandle_t dimmer_control_task_handle;
+
 HardwareFactory hardware_factory;
+
+int brightness = 30000;
+
 int main(void)
 {
   // Spawn the task that controls LED timing
@@ -48,6 +57,15 @@ int main(void)
         (configMAX_PRIORITIES - 2),
         led_control_task_stack,
         &led_control_task_tcb);
+    // Spawn the task that controls thr brightness of a LED 
+    dimmer_control_task_handle = xTaskCreateStatic(
+        dimmer_control_task,
+        "dimmer",
+        DIMMER_CONTROL_STACK_SIZE,
+        NULL,
+        (configMAX_PRIORITIES - 2),
+        dimmer_control_task_stack,
+        &dimmer_control_task_tcb);
 
     // Create the event group for sending events from the timer task to the
     // led task
@@ -60,7 +78,11 @@ int main(void)
     hw.Led2Notifier().On();
     hw.Led3Notifier().On();
     // hw.Led4Notifier().On();
-    hw.Led4PWM().SetOutput(0.5);
+    hw.Led4PWM().SetCCR(59000);
+    hw.Led4PWM().SetCCR(10000);
+    hw.Led4PWM().SetCCR(30000);
+    hw.Led4PWM().SetCCR(0);
+    hw.Led4PWM().SetCCR(59000);
     // Start the scheduler
     vTaskStartScheduler();
 
@@ -74,7 +96,7 @@ int main(void)
       hw.Led2().Clear();
       hw.Led3().Clear();
       // hw.Led4().Set();
-      hw.Led4PWM().SetOutput(0.5);
+      hw.Led4PWM().SetOutput(1.0);
     }
 
 }
@@ -128,16 +150,32 @@ static void led_control_task(void *parameters) {
                 hw.Led2Notifier().Off();
                 hw.Led3().Set();
                 // hw.Led4().Clear();
-                hw.Led4PWM().SetOutput(0.5);
             }
             if (event_bits & LED_OFF_EVENT_BIT) {
                 hw.Led1Notifier().Off();
                 hw.Led2Notifier().On();
                 hw.Led3().Clear();
                 // hw.Led4().Set();
-                hw.Led4PWM().SetOutput(0.5);
+                
             }
         }
+    }
+}
+bool state = 1;
+static void dimmer_control_task(void *parameters) {
+    while (1) {
+        IHardware& hw = hardware_factory.GetHardware();
+        hw.Initialize();
+        if(state)
+          brightness = brightness + 50;
+        else
+          brightness = brightness - 50;
+        if(brightness>59900)
+          state = 0;
+        if(brightness<100)
+          state = 1;
+        hw.Led4PWM().SetCCR( brightness );
+        vTaskDelay(1);
     }
 }
 
