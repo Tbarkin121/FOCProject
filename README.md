@@ -50,3 +50,9 @@ sudo apt-get install libtool autoconf texinfo libusb-dev
 Interesting repos
 https://github.com/ObKo/stm32-cmake/blob/master/cmake/gcc_stm32f4.cmake
 https://github.com/charleskorn/stm32f4-project-template
+
+to fix the error :
+default : Warning: Remote Connection disconnect. Retrying...
+from spinning endlessly on windows 10,
+go to internet options -> security -> Local Intranet -> Sites 
+and click the option box : Automatically detect intranet network
