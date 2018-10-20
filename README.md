@@ -42,7 +42,7 @@ ATTRS{idVendor}=="0483", ATTRS{idProduct}=="3748", MODE="0666"\
 sudo udevadm control --reload-rules\
 
 more garbage (for openocd)\
-sudo apt-get install libtool autoconf texinfo libusb-dev\
+sudo apt-get install libtool autoconf texinfo libusb-dev pkg-config 
 
 Interesting repos\
 https://github.com/ObKo/stm32-cmake/blob/master/cmake/gcc_stm32f4.cmake\
