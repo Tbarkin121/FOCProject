@@ -42,10 +42,10 @@ ATTRS{idVendor}=="0483", ATTRS{idProduct}=="3748", MODE="0666"\
 sudo udevadm control --reload-rules\
 
 more garbage (for openocd)\
-sudo apt-get install libtool autoconf texinfo libusb-dev pkg-config libusb-1.0.0-dev
-./configure --enable-stlink --enable-jlink --enable-ftdi --enable-maintainer-mode
-make
-sudo make install
+sudo apt-get install libtool autoconf texinfo libusb-dev pkg-config libusb-1.0.0-dev\
+./configure --enable-stlink --enable-jlink --enable-ftdi --enable-maintainer-mode\
+make\
+sudo make install\
 
 Interesting repos\
 https://github.com/ObKo/stm32-cmake/blob/master/cmake/gcc_stm32f4.cmake\
