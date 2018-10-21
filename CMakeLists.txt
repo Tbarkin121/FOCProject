@@ -111,10 +111,10 @@ include_directories(
 
 
 
-set(CMAKE_C_COMPILER ${TOOLS_PATH}/gcc-arm-none-eabi-7-2017-q4-major/bin/arm-none-eabi-gcc)
-set(CMAKE_CXX_COMPILER ${TOOLS_PATH}/gcc-arm-none-eabi-7-2017-q4-major/bin/arm-none-eabi-g++)
-set(CMAKE_ASM_COMPILER ${TOOLS_PATH}/gcc-arm-none-eabi-7-2017-q4-major/bin/arm-none-eabi-as)
-set(GCOV ${TOOLS_PATH}/gcc-arm-none-eabi-7-2017-q4-major/bin/arm-none-eabi-gcov)
+set(CMAKE_C_COMPILER ${TOOLS_PATH}/gcc-arm-none-eabi-7-2018-q2-update/bin/arm-none-eabi-gcc)
+set(CMAKE_CXX_COMPILER ${TOOLS_PATH}/gcc-arm-none-eabi-7-2018-q2-update/bin/arm-none-eabi-g++)
+set(CMAKE_ASM_COMPILER ${TOOLS_PATH}/gcc-arm-none-eabi-7-2018-q2-update/bin/arm-none-eabi-as)
+set(GCOV ${TOOLS_PATH}/gcc-arm-none-eabi-7-2018-q2-update/bin/arm-none-eabi-gcov)
 # Processor flags
 set(GCC_PROCESSOR_FLAGS "-mcpu=cortex-m4 -mthumb")
 #  -mcpu=cortex-m4                      Processor type is ARM Cortex M4

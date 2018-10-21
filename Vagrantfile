@@ -47,7 +47,7 @@ Vagrant.configure("2") do |config|
     #   http://unix.stackexchange.com/questions/129305/how-can-i-enable-access-to-usb-devices-within-virtualbox-guests
     vb.customize ['modifyvm', :id, '--usb', 'on']
     #vb.customize ['modifyvm', :id, '--usbehci', 'on']
-    vb.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'STLink', '--vendorid', '0x0483', '--productid', '0x3748']
+    vb.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'STLink', '--vendorid', '0x0483', '--productid', '0x374b']
     # Display the VirtualBox GUI when booting the machine
     vb.gui = false
 
