@@ -39,11 +39,10 @@ set(STM_LIB_SOURCES
         ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c
         ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c
         ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c
-        ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/BSP/STM32F4-Discovery/stm32f4_discovery.c
         )
 
 set(STM_STARTUP_SOURCES
-        ${CMAKE_SOURCE_DIR}/src/startup_stm32f407xx.s
+        ${CMAKE_SOURCE_DIR}/src/startup_stm32f446xx.s
         )
 
 set(FreeRTOS_LIB_SOURCES
@@ -162,7 +161,7 @@ set(GCC_DEBUG_FLAGS "-g3")
 #  -g3                                  Produces debugging information
 
 # STM32F Specific definitions
-set(STM_SPECIFIC_DEFINES "-DSTM32F407xx -DUSE_HAL_DRIVER -DHSE_VALUE=8000000")
+set(STM_SPECIFIC_DEFINES "-DSTM32F446xx -DUSE_HAL_DRIVER -DHSE_VALUE=8000000")
 #  -DSTM32F417xx                        Defines the processor to be STM32F407xx
 #  -DUSE_HAL_DRIVER                     Use the provided hardware abstraction layer drivers instead of direct register access
 #  -DHSE_VALUE=8000000                  Set crystal frequency to 8MHz
@@ -199,8 +198,8 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${GCC_PROCESSOR_FLAGS} ${G
 set(CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS)
 
 #set(GCC_TARGET_LINK_SCRIPTS "-T mem.ld -T stack.ld -T sections.ld")
-set(GCC_TARGET_LINK_SCRIPTS "-T STM32F407VGTx_FLASH.ld")
-set(GCC_TARGET_FREERTOS_LINK_SCRIPTS "-T STM32F407VGTx_FLASH.ld")
+set(GCC_TARGET_LINK_SCRIPTS "-T STM32F446RETx_FLASH.ld")
+set(GCC_TARGET_FREERTOS_LINK_SCRIPTS "-T STM32F446RETx_FLASH.ld")
 # For main build
 add_library(STM ${STM_LIB_SOURCES})
 add_library(STARTUP ${STM_STARTUP_SOURCES})
