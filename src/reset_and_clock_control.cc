@@ -50,7 +50,7 @@ void ResetAndClockControl::InitializeOscillators() const {
     // The voltage scaling allows optimizing the power consumption when the device is
     // clocked below the maximum system frequency, to update the voltage scaling value
     // regarding system frequency refer to product datasheet.
-    __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
+    __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
 
     // Initialize the HSE (High Speed External Oscillator) and initialize the PLLs
     // The board uses an 8MHz crystal
@@ -82,15 +82,17 @@ void ResetAndClockControl::InitializeOscillators() const {
 
     RCC_OscInitTypeDef RCC_OscInitStruct;
 
-    RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
-    RCC_OscInitStruct.LSIState = RCC_LSI_ON;
-    RCC_OscInitStruct.LSEState = RCC_LSE_ON;
-    RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+    RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+    RCC_OscInitStruct.LSIState = RCC_HSI_ON;
+    RCC_OscInitStruct.HSICalibrationValue = 16;
+    // RCC_OscInitStruct.LSIState = RCC_LSI_ON;
+    // RCC_OscInitStruct.LSEState = RCC_LSE_ON;
+    // RCC_OscInitStruct.HSEState = RCC_HSE_ON;
     RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-    RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-    RCC_OscInitStruct.PLL.PLLM = 8;
+    RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
+    RCC_OscInitStruct.PLL.PLLM = 16;
     RCC_OscInitStruct.PLL.PLLN = 336;
-    RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
+    RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV4;
     RCC_OscInitStruct.PLL.PLLQ = 7;
     HAL_RCC_OscConfig(&RCC_OscInitStruct);
 }
@@ -128,15 +130,15 @@ void ResetAndClockControl::InitializeBusClocks() const {
                     RCC_CLOCKTYPE_PCLK2);
     RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
     RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-    RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-    RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
-    HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
+    RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
+    RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+    HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2);
 
     // Set the appropriate constants here, based on the above calculations.
     // We are doing this manually as we are not using a calculator function
     // or macro above, so ensure this matches the comments if it ever changes
-    apb1_timer_frequency_hz_ = 84000000;  // 84 MHz
-    apb2_timer_frequency_hz_ = 168000000;  // 168 MHz
+    apb1_timer_frequency_hz_ = 42000000;  // 42 MHz
+    apb2_timer_frequency_hz_ = 84000000;  // 84 MHz
 }
 
 //-----------------------------------------------------------------------------

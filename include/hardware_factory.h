@@ -19,10 +19,10 @@
 class HardwareFactory {
  public:
     HardwareFactory() :
-        led1_base_pin_(rcc_, GPIOD, GPIO_PIN_12),
-        led2_base_pin_(rcc_, GPIOD, GPIO_PIN_13),
-        led3_base_pin_(rcc_, GPIOD, GPIO_PIN_14),
-        led4_base_pin_(rcc_, GPIOD, GPIO_PIN_15),
+        led1_base_pin_(rcc_, GPIOC, GPIO_PIN_8),
+        led2_base_pin_(rcc_, GPIOC, GPIO_PIN_6),
+        led3_base_pin_(rcc_, GPIOC, GPIO_PIN_5),
+        led4_base_pin_(rcc_, GPIOA, GPIO_PIN_12),
 
         led1_pin_(led1_base_pin_),
         led2_pin_(led2_base_pin_),

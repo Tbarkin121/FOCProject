@@ -155,7 +155,7 @@ void vApplicationTickHook();
 void __attribute__((weak)) SysTick_Handler(void) {
     // This SysTick_Handler is used only when FreeRTOS is not being used. The
     // call below emulates the FreeRTOS tick hook functionality.
-    vApplicationTickHook();
+    // vApplicationTickHook();
 }
 
 /******************************************************************************/
