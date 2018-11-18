@@ -42,7 +42,7 @@ set(STM_LIB_SOURCES
         )
 
 set(STM_STARTUP_SOURCES
-        ${CMAKE_SOURCE_DIR}/src/startup_stm32f446xx.s
+        ${CMAKE_SOURCE_DIR}/src/startup_stm32f401xe.s
         )
 
 set(FreeRTOS_LIB_SOURCES
@@ -161,8 +161,8 @@ set(GCC_DEBUG_FLAGS "-g3")
 #  -g3                                  Produces debugging information
 
 # STM32F Specific definitions
-set(STM_SPECIFIC_DEFINES "-DSTM32F446xx -DUSE_HAL_DRIVER -DHSE_VALUE=8000000")
-#  -DSTM32F417xx                        Defines the processor to be STM32F407xx
+set(STM_SPECIFIC_DEFINES "-DSTM32F401xE -DUSE_HAL_DRIVER -DHSE_VALUE=8000000")
+#  -DSTM32F401xE                       Defines the processor to be STM32F401xx
 #  -DUSE_HAL_DRIVER                     Use the provided hardware abstraction layer drivers instead of direct register access
 #  -DHSE_VALUE=8000000                  Set crystal frequency to 8MHz
 
@@ -198,15 +198,15 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${GCC_PROCESSOR_FLAGS} ${G
 set(CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS)
 
 #set(GCC_TARGET_LINK_SCRIPTS "-T mem.ld -T stack.ld -T sections.ld")
-set(GCC_TARGET_LINK_SCRIPTS "-T STM32F446RETx_FLASH.ld")
-set(GCC_TARGET_FREERTOS_LINK_SCRIPTS "-T STM32F446RETx_FLASH.ld")
+set(GCC_TARGET_LINK_SCRIPTS "-T STM32F401RETx_FLASH")
+set(GCC_TARGET_FREERTOS_LINK_SCRIPTS "-T STM32F401RETx_FLASH")
 # For main build
 add_library(STM ${STM_LIB_SOURCES})
 add_library(STARTUP ${STM_STARTUP_SOURCES})
 add_library(PROJECT ${PROJECT_LOW_LEVEL_SOURCES} ${PROJECT_LIB_SOURCES})
 add_library(FreeRTOS ${FreeRTOS_LIB_SOURCES})
 
-set_target_properties(FreeRTOS PROPERTIES COMPILE_FLAGS "-mfpu=fpv4-sp-d16 -mfloat-abi=softfp -DxPortSysTickHandler=SysTick_Handler")
+set_target_properties(FreeRTOS PROPERTIES COMPILE_FLAGS "-mfpu=fpv4-sp-d16 -mfloat-abi=hard -DxPortSysTickHandler=SysTick_Handler")
 set_target_properties(PROJECT PROPERTIES COMPILE_FLAGS "${BOOST_SPECIFIC_DEFINES}")
 
 
