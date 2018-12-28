@@ -50,6 +50,7 @@ void ResetAndClockControl::InitializeOscillators() const {
     // The voltage scaling allows optimizing the power consumption when the device is
     // clocked below the maximum system frequency, to update the voltage scaling value
     // regarding system frequency refer to product datasheet.
+    __HAL_RCC_PWR_CLK_ENABLE();
     __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
 
     // Initialize the HSE (High Speed External Oscillator) and initialize the PLLs
@@ -84,7 +85,7 @@ void ResetAndClockControl::InitializeOscillators() const {
 
     RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
     RCC_OscInitStruct.LSIState = RCC_HSI_ON;
-    RCC_OscInitStruct.HSICalibrationValue = 16;
+    RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
     // RCC_OscInitStruct.LSIState = RCC_LSI_ON;
     // RCC_OscInitStruct.LSEState = RCC_LSE_ON;
     // RCC_OscInitStruct.HSEState = RCC_HSE_ON;
@@ -149,28 +150,29 @@ void ResetAndClockControl::InitializeSysTick() const {
 
 //-----------------------------------------------------------------------------
 void ResetAndClockControl::EnablePeripheralClocks() const {
-    __ADC1_CLK_ENABLE();
-    __HAL_RCC_CRC_CLK_ENABLE();
+    // __ADC1_CLK_ENABLE();
+    // __HAL_RCC_CRC_CLK_ENABLE();
     __HAL_RCC_GPIOA_CLK_ENABLE();  // PWM
-    __HAL_RCC_GPIOB_CLK_ENABLE();  // contactor enable; I2C;
+    __HAL_RCC_GPIOB_CLK_ENABLE();  // I2C;
     __HAL_RCC_GPIOC_CLK_ENABLE();  // Motor Control En/Dis
-    __HAL_RCC_GPIOD_CLK_ENABLE();  // Encoder
-    __HAL_RCC_GPIOE_CLK_ENABLE();  // Capacitor Bank Enable; motor enable
+    __HAL_RCC_GPIOH_CLK_ENABLE();  // Motor Control En/Dis
+    // __HAL_RCC_GPIOD_CLK_ENABLE();  // Encoder
+    // __HAL_RCC_GPIOE_CLK_ENABLE();  // Capacitor Bank Enable; motor enable
     // __HAL_RCC_GPIOF_CLK_ENABLE();  // Buttons; watchdog
     // __HAL_RCC_GPIOG_CLK_ENABLE();  // Buttons; watchdog
     // __HAL_RCC_GPIOI_CLK_ENABLE();  // charger status line
     __HAL_RCC_I2C1_CLK_ENABLE();
-    __HAL_RCC_TIM1_CLK_ENABLE();   // PWM
-    __HAL_RCC_TIM2_CLK_ENABLE();
-    __HAL_RCC_TIM3_CLK_ENABLE();
-    __HAL_RCC_TIM4_CLK_ENABLE();   // Encoder
-    __HAL_RCC_TIM5_CLK_ENABLE();
+    // __HAL_RCC_TIM1_CLK_ENABLE();   // PWM
+    // __HAL_RCC_TIM2_CLK_ENABLE();
+    // __HAL_RCC_TIM3_CLK_ENABLE();
+    // __HAL_RCC_TIM4_CLK_ENABLE();   // Encoder
+    // __HAL_RCC_TIM5_CLK_ENABLE();
     // __HAL_RCC_TIM8_CLK_ENABLE();
-    __HAL_RCC_USART2_CLK_ENABLE();
+    // __HAL_RCC_USART2_CLK_ENABLE();
     // __HAL_RCC_USART3_CLK_ENABLE();
-    __HAL_RCC_USART6_CLK_ENABLE();
-    __HAL_RCC_SPI3_CLK_ENABLE();
-    __HAL_RCC_MCO1_CONFIG(RCC_MCO1SOURCE_HSE, RCC_MCODIV_1);
+    // __HAL_RCC_USART6_CLK_ENABLE();
+    // __HAL_RCC_SPI3_CLK_ENABLE();
+    // __HAL_RCC_MCO1_CONFIG(RCC_MCO1SOURCE_HSE, RCC_MCODIV_1);
 }
 
 //-----------------------------------------------------------------------------

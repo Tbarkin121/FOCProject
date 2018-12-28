@@ -70,13 +70,13 @@ set(PROJECT_LOW_LEVEL_SOURCES
 
         #${CMAKE_SOURCE_DIR}/src/adc.cc
         #${CMAKE_SOURCE_DIR}/src/can.cc
-        #${CMAKE_SOURCE_DIR}/src/i2c.cc
+        ${CMAKE_SOURCE_DIR}/src/i2c.cc
         ${CMAKE_SOURCE_DIR}/src/pwm.cc
         #${CMAKE_SOURCE_DIR}/src/spi.cc
         #${CMAKE_SOURCE_DIR}/src/timer.cc
         #${CMAKE_SOURCE_DIR}/src/uart.cc
 
-
+        
         
         )
 
@@ -89,6 +89,7 @@ set(PROJECT_LIB_SOURCES
         ${CMAKE_SOURCE_DIR}/src/hardware.cc
         ${CMAKE_SOURCE_DIR}/src/simple_led_notifier.cc
         ${CMAKE_SOURCE_DIR}/src/error_categories.cc
+        ${CMAKE_SOURCE_DIR}/src/MPU9250.cc
         )
 
 include_directories(
@@ -98,6 +99,7 @@ include_directories(
         ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/CMSIS/Include
 
         ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Drivers/BSP/STM32F4_Discovery
+        ${TOOLS_PATH}/boost_1_68_0
 
         ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party
         ${TOOLS_PATH}/STM32Cube_FW_F4_V1.21.0/Middlewares/Third_Party/FreeRTOS/Source/include

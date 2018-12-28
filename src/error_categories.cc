@@ -9,7 +9,7 @@
 
 #include "include/error_categories.h"
 //#include "include/timer.h"
-//#include "include/i2c.h"
+#include "include/i2c.h"
 //#include "include/adc.h"
 //#include "include/system_tick.h"
 #include "include/led_notifier_interface.h"
@@ -19,6 +19,7 @@
 //#include "include/spi_interface.h"
 //#include "include/rtos_task_interface.h"
 //#include "include/rtos_queue_interface.h"
+#include "include/MPU9250_interface.h"
 
 //-----------------------------------------------------------------------------
 
@@ -101,6 +102,44 @@ std::error_code make_error_code(PWMError error) {
 }
 std::error_condition make_error_condition(PWMError error) {
     return std::error_condition(static_cast<int>(error), PWMCategory::Instance());
+}
+//-----------------------------------------------------------------------------
+class I2CCategory : public std::error_category {
+ public:
+    static const std::error_category& Instance() {
+        static I2CCategory instance;
+        return instance;
+    }
+
+ private:
+    const char* name() const noexcept { return "I2C Error"; }
+    std::string message(int error) const { return "N/A"; }
+};
+
+std::error_code make_error_code(I2CError error) {
+    return std::error_code(static_cast<int>(error), I2CCategory::Instance());
+}
+std::error_condition make_error_condition(I2CError error) {
+    return std::error_condition(static_cast<int>(error), I2CCategory::Instance());
+}
+
+//-----------------------------------------------------------------------------
+class IMUCategory : public std::error_category {
+ public:
+    static const std::error_category& Instance() {
+        static IMUCategory instance;
+        return instance;
+    }
+
+    const char* name() const noexcept { return "IMU Error"; }
+    std::string message(int error) const { return "N/A"; }
+};
+
+std::error_code make_error_code(IMUError error) {
+    return std::error_code(static_cast<int>(error), IMUCategory::Instance());
+}
+std::error_condition make_error_condition(IMUError error) {
+    return std::error_condition(static_cast<int>(error), IMUCategory::Instance());
 }
 
 //-----------------------------------------------------------------------------

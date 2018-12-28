@@ -33,6 +33,8 @@ std::error_code Hardware::Initialize() const {
 	};
 	led4_pwm_.Initialize(pwm_config_);
 	led4_pwm_.Enable();
+
+	mpu9250_.Initialize();
 	return std::error_code();
 }
 

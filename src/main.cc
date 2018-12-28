@@ -8,7 +8,7 @@
 // #include "task.h"
 // #include "event_groups.h"
 
-// static ResetAndClockControl rcc;
+static ResetAndClockControl rcc;
 
 // static void led_control_task(void *parameters);
 // static void timer_control_task(void *parameters);
@@ -92,15 +92,20 @@ int main(void)
     to be created.  See the memory management section on the FreeRTOS web site
     for more details. */
     HardwareFactory hardware_factory;
-    hardware_factory.led1_pin_.Initialize();
-    hardware_factory.led2_pin_.Initialize();
-    hardware_factory.led3_pin_.Initialize();
-    hardware_factory.led4_pin_.Initialize();
-    hardware_factory.led1_pin_.Set();
-    hardware_factory.led2_pin_.Clear();
-    hardware_factory.led3_pin_.Set();
-    hardware_factory.led4_pin_.Clear();
+    rcc.InitializeHardware();
+    IHardware& hw = hardware_factory.GetHardware();
+    hw.Initialize();
+
+    uint16_t test = 0;
+    hw.Led2Notifier().On();
+    auto tmp = hw.MPU9250().GetAccelerationResult();
+    if(tmp.accel_x)
+      test = 1;
+    
     while(1){
+        test++;
+        if(test>100)
+          test = 0;
         hardware_factory.led1_pin_.Toggle();
         hardware_factory.led2_pin_.Toggle();
         hardware_factory.led3_pin_.Toggle();

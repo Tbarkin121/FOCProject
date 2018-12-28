@@ -15,6 +15,8 @@
 #include "include/gpio.h"
 #include "include/simple_led_notifier.h"
 #include "include/pwm.h"
+#include "include/i2c.h"
+#include "include/MPU9250.h"
 
 class HardwareFactory {
  public:
@@ -45,6 +47,13 @@ class HardwareFactory {
         // PWM
         led4_pwm_(rcc_, led4_base_pin_),
 
+        //I2C
+        sda_(rcc_, GPIOB, GPIO_PIN_9),
+        scl_(rcc_, GPIOB, GPIO_PIN_8),
+        testI2C_(rcc_, scl_, sda_),
+        //IMU
+        mpu9250_(testI2C_),
+
         hw_(rcc_,
             led1_pin_,
             led2_pin_,
@@ -54,7 +63,8 @@ class HardwareFactory {
         led2_notifier_,
         led3_notifier_,
         led4_notifier_,
-        led4_pwm_) {}
+        led4_pwm_,
+        mpu9250_) {}
 
     IHardware& GetHardware() { return hw_; }
 
@@ -80,6 +90,14 @@ class HardwareFactory {
 
     // PWM
     PWM led4_pwm_;
+
+    //I2C
+    BaseGPIOPin sda_;
+    BaseGPIOPin scl_;
+    I2C testI2C_;
+
+    //IMU
+    MPU9250 mpu9250_;
 
     Hardware hw_;
 };
