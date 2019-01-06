@@ -101,15 +101,16 @@ int main(void)
     hw.Led2Notifier().On();
     hw.Led3Notifier().On();
     hw.Led4PWM().SetOutput(0.5);
+    hw.MPU9250().getGres();
+    hw.MPU9250().getAres();
     auto tmp = hw.MPU9250().GetAccelerationResult();
-    if(tmp.accel_x)
-      test = 1;
     
-    int16_t storage1[100];
-    int16_t storage2[100];
-    int16_t storage3[100];
-    uint16_t s_idx = 0;
+    
+    float storage1[100];
+    float storage2[100];
+    float storage3[100];
     while(1){
+      for(uint16_t s_idx = 0; s_idx<100; s_idx++) {
         test++;
         if(test>6)
           test = 0;
@@ -121,12 +122,11 @@ int main(void)
         storage1[s_idx] = tmp.accel_x;
         storage2[s_idx] = tmp.accel_y;
         storage3[s_idx] = tmp.accel_z;
-        s_idx++;
-        if(s_idx>100 && storage1[0] && storage2[0] && storage3[0])
-          s_idx = 0;
         HAL_Delay(10);
+        }
+        if(storage1[0] && storage2[0] && storage3[0])
+          HAL_Delay(50);
     }
-
 }
 
 
