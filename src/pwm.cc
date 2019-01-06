@@ -75,7 +75,7 @@ std::error_code PWM::Initialize(PWMConfig config) const {
 
     tim_handle_.Init.Prescaler = prescaler;
     tim_handle_.Init.CounterMode = TIM_COUNTERMODE_UP;
-    tim_handle_.Init.Period = 60000;
+    tim_handle_.Init.Period = timer_period_;
     tim_handle_.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
     
     tim_handle_.Init.RepetitionCounter = 0;
@@ -85,9 +85,9 @@ std::error_code PWM::Initialize(PWMConfig config) const {
         return error;
 
     tim_output_capture_config_.OCMode       = TIM_OCMODE_PWM1;
-    tim_output_capture_config_.Pulse        = 30000;
+    tim_output_capture_config_.Pulse        = timer_period_;
     tim_output_capture_config_.OCPolarity   = TIM_OCPOLARITY_HIGH;
-    tim_output_capture_config_.OCFastMode   = TIM_OCFAST_DISABLE;
+    tim_output_capture_config_.OCFastMode   = TIM_OCFAST_ENABLE;
     
     // tim_output_capture_config_.OCIdleState  = TIM_OCIDLESTATE_RESET;
     // tim_output_capture_config_.OCNPolarity  = TIM_OCNPOLARITY_HIGH;
@@ -117,21 +117,17 @@ std::error_code PWM::Disable() const {
 }
 
 std::error_code PWM::ConfigurePins() const {
-    // The PWM instance is fixed to TIM1.
-    if (pwm_pin_.Port() == GPIOA) {
+    // The PWM instance is fixed to TIM4.
+    
+
+    if (pwm_pin_.Port() == GPIOB) {
         // GPIOA 8 - 11 valid
         switch (pwm_pin_.Pin()) {
-            case GPIO_PIN_8:
+            case GPIO_PIN_6:
                 channel_ = TIM_CHANNEL_1;
                 break;
-            case GPIO_PIN_9:
+            case GPIO_PIN_7:
                 channel_ = TIM_CHANNEL_2;
-                break;
-            case GPIO_PIN_10:
-                channel_ = TIM_CHANNEL_3;
-                break;
-            case GPIO_PIN_11:
-                channel_ = TIM_CHANNEL_4;
                 break;
             default:
                 return PWMError::INVALID_PINS;
@@ -139,30 +135,7 @@ std::error_code PWM::ConfigurePins() const {
 
         // Pin was determined to be valid. Configure for PWM output.
         return pwm_pin_.Initialize(
-            BaseGPIOPin::GetAlternatePushPullConfiguration(GPIO_AF1_TIM1));
-    }
-
-    if (pwm_pin_.Port() == GPIOD) {
-        // GPIOA 12 - 15 valid
-        switch (pwm_pin_.Pin()) {
-            case GPIO_PIN_12:
-                channel_ = TIM_CHANNEL_1;
-                break;
-            case GPIO_PIN_13:
-                channel_ = TIM_CHANNEL_2;
-                break;
-            case GPIO_PIN_14:
-                channel_ = TIM_CHANNEL_3;
-                break;
-            case GPIO_PIN_15:
-                channel_ = TIM_CHANNEL_4;
-                break;
-            default:
-                return PWMError::INVALID_PINS;
-        }
-
-        // Pin was determined to be valid. Configure for PWM output.
-        return pwm_pin_.Initialize( BaseGPIOPin::GetAlternatePushPullConfiguration(GPIO_AF2_TIM4) );
+            BaseGPIOPin::GetAlternatePushPullConfiguration(GPIO_AF2_TIM4));
     }
 
     // No valid pin configuration matched (would have returned early)
@@ -187,17 +160,11 @@ std::error_code PWM::SetOutput(float output_value) const {
         // fails exactly every other time you execute for some god forsaken
         // reason.
         switch (pwm_pin_.Pin()) {
-            case GPIO_PIN_12:
+            case GPIO_PIN_6:
                 tim_handle_.Instance->CCR1 = ccr;
                 break;
-            case GPIO_PIN_13:
+            case GPIO_PIN_7:
                 tim_handle_.Instance->CCR2 = ccr;
-                break;
-            case GPIO_PIN_14:
-                tim_handle_.Instance->CCR3 = ccr;
-                break;
-            case GPIO_PIN_15:
-                tim_handle_.Instance->CCR4 = ccr;
                 break;
             default:
                 return PWMError::INVALID_PINS;

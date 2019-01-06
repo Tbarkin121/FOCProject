@@ -96,26 +96,35 @@ int main(void)
     IHardware& hw = hardware_factory.GetHardware();
     hw.Initialize();
 
-    uint16_t test = 0;
+    float test = 0;
+    hw.Led1Notifier().On();
     hw.Led2Notifier().On();
+    hw.Led3Notifier().On();
+    hw.Led4PWM().SetOutput(0.5);
     auto tmp = hw.MPU9250().GetAccelerationResult();
     if(tmp.accel_x)
       test = 1;
     
+    int16_t storage1[100];
+    int16_t storage2[100];
+    int16_t storage3[100];
+    uint16_t s_idx = 0;
     while(1){
         test++;
-        if(test>100)
+        if(test>6)
           test = 0;
-        hardware_factory.led1_pin_.Toggle();
-        hardware_factory.led2_pin_.Toggle();
-        hardware_factory.led3_pin_.Toggle();
-        hardware_factory.led4_pin_.Toggle();
-        HAL_Delay(1000);
-      // hw.Led1().Set();
-      // hw.Led2().Clear();
-      // hw.Led3().Clear();
-      // // hw.Led4().Set();
-      // hw.Led4PWM().SetOutput(1.0);
+        hw.Led1Notifier().Toggle();
+        hw.Led2Notifier().Toggle();
+        hw.Led3Notifier().Toggle();
+        hw.Led4PWM().SetOutput(test/6);
+        tmp = hw.MPU9250().GetAccelerationResult();
+        storage1[s_idx] = tmp.accel_x;
+        storage2[s_idx] = tmp.accel_y;
+        storage3[s_idx] = tmp.accel_z;
+        s_idx++;
+        if(s_idx>100 && storage1[0] && storage2[0] && storage3[0])
+          s_idx = 0;
+        HAL_Delay(10);
     }
 
 }

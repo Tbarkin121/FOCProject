@@ -53,47 +53,17 @@ void ResetAndClockControl::InitializeOscillators() const {
     __HAL_RCC_PWR_CLK_ENABLE();
     __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
 
-    // Initialize the HSE (High Speed External Oscillator) and initialize the PLLs
-    // The board uses an 8MHz crystal
-
-    // PLLN must be between 50 and 432
-    // The VCO output frequency should be between 100MHz and 432MHz
-
-    // PLLN = 336
-    // PLLM = 8
-    // fVCO = fPLLinput * PLLN/PLLM
-    // fVCO = 8MHz * 336/8
-    // fVCO = 336MHz
-
-    // The maximum frequency for the system clock is 180MHz
-
-    // PLLP = 2
-    // fPLLoutput = fVCO / PLLP
-    // fPLLoutput = 336MHz / 2
-    // fPLLoutput = 168MHz
-
-    // PLLQ = 7
-    // fUSB_SDIO_RNG = fVCO / PLLQ
-    // fUSB_SDIO_RNG = 336MHz / 7
-    // fUSB_SDIO_RNG = 48MHz
-
-    // This system doesn't use USB, SDIO, or RNG.  These clocks will
-    // not be enabled.  However, should they need to be, the clock should
-    // be 48 MHz to operate correctly
-
     RCC_OscInitTypeDef RCC_OscInitStruct;
 
-    RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
-    RCC_OscInitStruct.LSIState = RCC_HSI_ON;
+    RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI|RCC_OSCILLATORTYPE_HSE;
+    RCC_OscInitStruct.HSEState = RCC_HSE_BYPASS;
+    RCC_OscInitStruct.HSIState = RCC_HSI_ON;
     RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
-    // RCC_OscInitStruct.LSIState = RCC_LSI_ON;
-    // RCC_OscInitStruct.LSEState = RCC_LSE_ON;
-    // RCC_OscInitStruct.HSEState = RCC_HSE_ON;
     RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-    RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
-    RCC_OscInitStruct.PLL.PLLM = 16;
-    RCC_OscInitStruct.PLL.PLLN = 336;
-    RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV4;
+    RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+    RCC_OscInitStruct.PLL.PLLM = 4;
+    RCC_OscInitStruct.PLL.PLLN = 84;
+    RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
     RCC_OscInitStruct.PLL.PLLQ = 7;
     HAL_RCC_OscConfig(&RCC_OscInitStruct);
 }
@@ -135,6 +105,7 @@ void ResetAndClockControl::InitializeBusClocks() const {
     RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
     HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2);
 
+
     // Set the appropriate constants here, based on the above calculations.
     // We are doing this manually as we are not using a calculator function
     // or macro above, so ensure this matches the comments if it ever changes
@@ -152,8 +123,10 @@ void ResetAndClockControl::InitializeSysTick() const {
 void ResetAndClockControl::EnablePeripheralClocks() const {
     // __ADC1_CLK_ENABLE();
     // __HAL_RCC_CRC_CLK_ENABLE();
-    __HAL_RCC_GPIOA_CLK_ENABLE();  // PWM
-    __HAL_RCC_GPIOB_CLK_ENABLE();  // I2C;
+    __HAL_RCC_SYSCFG_CLK_ENABLE();
+
+    __HAL_RCC_GPIOA_CLK_ENABLE();  // ??
+    __HAL_RCC_GPIOB_CLK_ENABLE();  // I2C and PWM;
     __HAL_RCC_GPIOC_CLK_ENABLE();  // Motor Control En/Dis
     __HAL_RCC_GPIOH_CLK_ENABLE();  // Motor Control En/Dis
     // __HAL_RCC_GPIOD_CLK_ENABLE();  // Encoder
@@ -165,14 +138,18 @@ void ResetAndClockControl::EnablePeripheralClocks() const {
     // __HAL_RCC_TIM1_CLK_ENABLE();   // PWM
     // __HAL_RCC_TIM2_CLK_ENABLE();
     // __HAL_RCC_TIM3_CLK_ENABLE();
-    // __HAL_RCC_TIM4_CLK_ENABLE();   // Encoder
+    __HAL_RCC_TIM4_CLK_ENABLE();   // PWM...
     // __HAL_RCC_TIM5_CLK_ENABLE();
     // __HAL_RCC_TIM8_CLK_ENABLE();
     // __HAL_RCC_USART2_CLK_ENABLE();
     // __HAL_RCC_USART3_CLK_ENABLE();
     // __HAL_RCC_USART6_CLK_ENABLE();
     // __HAL_RCC_SPI3_CLK_ENABLE();
-    // __HAL_RCC_MCO1_CONFIG(RCC_MCO1SOURCE_HSE, RCC_MCODIV_1);
+    
+    // HAL_RCC_MCOConfig(RCC_MCO1, RCC_MCO1SOURCE_HSI, RCC_MCODIV_1);
+    // HAL_RCC_MCOConfig(RCC_MCO2, RCC_MCO2SOURCE_SYSCLK, RCC_MCODIV_1);
+    // __HAL_RCC_MCO1_CONFIG(RCC_MCO1SOURCE_HSI, RCC_MCODIV_1);
+    // __HAL_RCC_MCO2_CONFIG(RCC_MCO2SOURCE_SYSCLK, RCC_MCODIV_1);
 }
 
 //-----------------------------------------------------------------------------

@@ -2,5 +2,7 @@ target remote localhost:3333
 file /vagrant/build/FieldOrientedControl
 load
 monitor reset halt
-b MPU9250.cc:38
+
+b main.cc:126
+
 continue

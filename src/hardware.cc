@@ -13,7 +13,7 @@
 // #include "include/reset_and_clock_control.h"
 
 
-std::error_code Hardware::Initialize() const {
+std::error_code Hardware::	Initialize() const {
 	//led1_.Initialize();
     //led2_.Initialize();
     //led3_.Initialize();
