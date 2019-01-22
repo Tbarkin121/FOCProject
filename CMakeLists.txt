@@ -67,6 +67,7 @@ set(PROJECT_LOW_LEVEL_SOURCES
         ${CMAKE_SOURCE_DIR}/src/reset_and_clock_control.cc
         ${CMAKE_SOURCE_DIR}/src/rtos_task.cc
         ${CMAKE_SOURCE_DIR}/src/rtos_queue.cc
+        ${CMAKE_SOURCE_DIR}/src/quaternion_filter.cc
 
         #${CMAKE_SOURCE_DIR}/src/adc.cc
         #${CMAKE_SOURCE_DIR}/src/can.cc
@@ -90,6 +91,7 @@ set(PROJECT_LIB_SOURCES
         ${CMAKE_SOURCE_DIR}/src/simple_led_notifier.cc
         ${CMAKE_SOURCE_DIR}/src/error_categories.cc
         ${CMAKE_SOURCE_DIR}/src/MPU9250.cc
+        ${CMAKE_SOURCE_DIR}/src/AK8963.cc
         )
 
 include_directories(

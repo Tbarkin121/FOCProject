@@ -35,6 +35,8 @@ std::error_code Hardware::	Initialize() const {
 	led4_pwm_.Enable();
 
 	mpu9250_.Initialize();
+	ak8963_.Initialize();
+	
 	return std::error_code();
 }
 

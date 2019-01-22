@@ -103,12 +103,16 @@ int main(void)
     hw.Led4PWM().SetOutput(0.5);
     hw.MPU9250().getGres();
     hw.MPU9250().getAres();
+    hw.AK8963().getMres();
     auto tmp = hw.MPU9250().GetAccelerationResult();
-    
+    auto tmp2 = hw.AK8963().GetMagnometerResult();
     
     float storage1[100];
     float storage2[100];
     float storage3[100];
+    float storage4[100];
+    float storage5[100];
+    float storage6[100];
     while(1){
       for(uint16_t s_idx = 0; s_idx<100; s_idx++) {
         test++;
@@ -119,13 +123,18 @@ int main(void)
         hw.Led3Notifier().Toggle();
         hw.Led4PWM().SetOutput(test/6);
         tmp = hw.MPU9250().GetAccelerationResult();
+        tmp2 = hw.AK8963().GetMagnometerResult();
         storage1[s_idx] = tmp.accel_x;
         storage2[s_idx] = tmp.accel_y;
         storage3[s_idx] = tmp.accel_z;
+        storage4[s_idx] = tmp2.mag_x;
+        storage5[s_idx] = tmp2.mag_y;
+        storage6[s_idx] = tmp2.mag_z;
         HAL_Delay(10);
         }
-        if(storage1[0] && storage2[0] && storage3[0])
+        if( (storage1[0] && storage2[0] && storage3[0]) || storage4[0] || storage5[0] || storage6[0])
           HAL_Delay(50);
+
     }
 }
 

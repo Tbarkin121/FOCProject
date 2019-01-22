@@ -10,23 +10,36 @@
 #define INCLUDE_MPU9250_H_
 
 #include "include/MPU9250_interface.h"
-
+#include "quaternion_filter.h"
 //-----------------------------------------------------------------------------
 class II2C;
 
 //-----------------------------------------------------------------------------
+#define MAX_COMPASS_SAMPLE_RATE (100)
+
 enum Ascale {
-    AFS_2G = 0,
-    AFS_4G,
-    AFS_8G,
-    AFS_16G
+    AFS_2G                          = (0<<3),
+    AFS_4G                          = (1<<3),
+    AFS_8G                          = (2<<3),
+    AFS_16G                         = (3<<3),
 };
 
 enum Gscale {
-    GFS_250DPS = 0,
-    GFS_500DPS,
-    GFS_1000DPS,
-    GFS_2000DPS
+    GFS_250DPS                      = (0<<3),
+    GFS_500DPS                      = (1<<3),
+    GFS_1000DPS                     = (2<<3),
+    GFS_2000DPS                     = (3<<3),
+};
+
+enum LPFscale {
+    INV_FILTER_256HZ_NOLPF2         = (0),
+    INV_FILTER_188HZ                = (1),
+    INV_FILTER_98HZ                 = (2),
+    INV_FILTER_42HZ                 = (3),
+    INV_FILTER_20HZ                 = (4),
+    INV_FILTER_10HZ                 = (5),
+    INV_FILTER_5HZ                  = (6),
+    INV_FILTER_2100HZ_NOLPF         = (7)
 };
 
 class MPU9250 : public IMPU9250 {
@@ -37,11 +50,21 @@ class MPU9250 : public IMPU9250 {
     device_address_(address),
     initialized_(false),
     ascale_(AFS_2G),
-    gscale_(GFS_250DPS),
+    gscale_(GFS_1000DPS),
+    lpfscale_(INV_FILTER_42HZ),
     aRes(0),
     gRes(0) {}
 
     std::error_code Initialize() const;
+    void SetupGyro(Gscale val) const;
+    void SetupAccl(Ascale val) const;
+    void SetupLPF(LPFscale val) const;
+    void SetupSampleRate(uint16_t rate) const;
+    // void SetupFIFO(uint8_t rate) const;
+    void SetupCompass(void) const;
+    void SetupCompassSampleRate(uint8_t magrate, uint16_t rate) const;
+    void SetBypass(bool val) const;
+
     AccelerationResult GetAccelerationResult() const;
     GyroResult GetGyroResult() const;
     void getAres() const;
@@ -52,8 +75,10 @@ class MPU9250 : public IMPU9250 {
     const II2C& i2c_;
     const uint8_t device_address_;
     mutable bool initialized_;
-    Ascale ascale_;
-    Gscale gscale_;
+    const Ascale ascale_;
+    const Gscale gscale_;
+    const LPFscale lpfscale_;
+
     mutable float aRes;
     mutable float gRes;
     
@@ -194,7 +219,6 @@ class MPU9250 : public IMPU9250 {
     constexpr static uint8_t YA_OFFSET_L        = 0x7B;
     constexpr static uint8_t ZA_OFFSET_H        = 0x7D;
     constexpr static uint8_t ZA_OFFSET_L        = 0x7E;
-
 
 
 

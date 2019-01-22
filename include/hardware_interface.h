@@ -18,6 +18,7 @@ class IOutputPin;
 class ILedNotifier;
 class IPWM;
 class IMPU9250;
+class IAK8963;
 
 class IHardware {
  public:
@@ -34,6 +35,7 @@ class IHardware {
         virtual const ILedNotifier& Led4Notifier() const = 0;
         virtual const IPWM& Led4PWM() const = 0;
         virtual const IMPU9250& MPU9250() const = 0;
+        virtual const IAK8963& AK8963() const = 0;
 };
 
 #endif  // INCLUDE_HARDWARE_INTERFACE_H_

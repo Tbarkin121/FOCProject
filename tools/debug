@@ -3,6 +3,17 @@ file /vagrant/build/FieldOrientedControl
 load
 monitor reset halt
 
-b main.cc:127
+b main.cc:108
+b main.cc:126
+#b AK8963.cc:22
+#b AK8963.cc:55
+#b AK8963.cc:67
+
+#b MPU9250.cc:34
+#b MPU9250.cc:107
+#b MPU9250.cc:119
+#b MPU9250.cc:184
+#b MPU9250.cc:189
+#b MPU9250.cc:51
 
 continue

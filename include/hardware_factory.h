@@ -17,6 +17,7 @@
 #include "include/pwm.h"
 #include "include/i2c.h"
 #include "include/MPU9250.h"
+#include "include/AK8963.h"
 
 class HardwareFactory {
  public:
@@ -53,6 +54,7 @@ class HardwareFactory {
         testI2C_(rcc_, scl_, sda_),
         //IMU
         mpu9250_(testI2C_),
+        ak8963_(testI2C_),
 
         hw_(rcc_,
             led1_pin_,
@@ -64,7 +66,8 @@ class HardwareFactory {
         led3_notifier_,
         led4_notifier_,
         led4_pwm_,
-        mpu9250_) {}
+        mpu9250_,
+        ak8963_) {}
 
     IHardware& GetHardware() { return hw_; }
 
@@ -98,6 +101,7 @@ class HardwareFactory {
 
     //IMU
     MPU9250 mpu9250_;
+    AK8963 ak8963_;
 
     Hardware hw_;
 };

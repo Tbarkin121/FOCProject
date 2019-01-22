@@ -17,6 +17,7 @@
 #include "include/led_notifier_interface.h"
 #include "include/pwm_interface.h"
 #include "include/MPU9250_interface.h"
+#include "include/AK8963_interface.h"
 
 class Hardware : public IHardware {
  public:
@@ -30,7 +31,8 @@ class Hardware : public IHardware {
                  const ILedNotifier& led3_notifier,
                  const ILedNotifier& led4_notifier,
                  const IPWM& led4_pwm,
-                 const IMPU9250& mpu9250)
+                 const IMPU9250& mpu9250,
+                 const IAK8963& ak8963)
                  : rcc_(rcc),
                    led1_(led1),
                    led2_(led2),
@@ -41,7 +43,8 @@ class Hardware : public IHardware {
                    led3_notifier_(led3_notifier),
                    led4_notifier_(led4_notifier),
                    led4_pwm_(led4_pwm),
-                   mpu9250_(mpu9250) {}
+                   mpu9250_(mpu9250),
+                   ak8963_(ak8963) {}
 
         std::error_code Initialize() const;
         const IResetAndClockControl& ResetAndClockControl() const { return rcc_; }
@@ -55,6 +58,7 @@ class Hardware : public IHardware {
         const ILedNotifier& Led4Notifier() const { return led4_notifier_; }
         const IPWM& Led4PWM() const { return led4_pwm_; }
         const IMPU9250& MPU9250() const { return mpu9250_; }
+        const IAK8963& AK8963() const { return ak8963_; }
 
  protected:
         const IResetAndClockControl& rcc_;
@@ -68,6 +72,7 @@ class Hardware : public IHardware {
         const ILedNotifier& led4_notifier_;
         const IPWM& led4_pwm_;
         const IMPU9250& mpu9250_;
+        const IAK8963& ak8963_;
 };
 
 #endif  // INCLUDE_HARDWARE_H_

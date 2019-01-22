@@ -20,6 +20,7 @@
 //#include "include/rtos_task_interface.h"
 //#include "include/rtos_queue_interface.h"
 #include "include/MPU9250_interface.h"
+#include "include/AK8963_interface.h"
 
 //-----------------------------------------------------------------------------
 
@@ -140,6 +141,25 @@ std::error_code make_error_code(IMUError error) {
 }
 std::error_condition make_error_condition(IMUError error) {
     return std::error_condition(static_cast<int>(error), IMUCategory::Instance());
+}
+
+//-----------------------------------------------------------------------------
+class MagCategory : public std::error_category {
+ public:
+    static const std::error_category& Instance() {
+        static MagCategory instance;
+        return instance;
+    }
+
+    const char* name() const noexcept { return "Mag Error"; }
+    std::string message(int error) const { return "N/A"; }
+};
+
+std::error_code make_error_code(MagError error) {
+    return std::error_code(static_cast<int>(error), MagCategory::Instance());
+}
+std::error_condition make_error_condition(MagError error) {
+    return std::error_condition(static_cast<int>(error), MagCategory::Instance());
 }
 
 //-----------------------------------------------------------------------------
