@@ -101,8 +101,8 @@ int main(void)
     hw.Led2Notifier().On();
     hw.Led3Notifier().On();
     hw.Led4PWM().SetOutput(0.5);
-    hw.MPU9250().getGres();
-    hw.MPU9250().getAres();
+    // hw.MPU9250().getGres();
+    // hw.MPU9250().getAres();
     hw.AK8963().getMres();
     auto tmp = hw.MPU9250().GetAccelerationResult();
     auto tmp2 = hw.AK8963().GetMagnometerResult();

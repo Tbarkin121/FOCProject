@@ -10,6 +10,7 @@
 #define INCLUDE_MPU9250_H_
 
 #include "include/MPU9250_interface.h"
+#include "include/inv_mpu.h"
 #include "quaternion_filter.h"
 //-----------------------------------------------------------------------------
 class II2C;
@@ -17,30 +18,30 @@ class II2C;
 //-----------------------------------------------------------------------------
 #define MAX_COMPASS_SAMPLE_RATE (100)
 
-enum Ascale {
-    AFS_2G                          = (0<<3),
-    AFS_4G                          = (1<<3),
-    AFS_8G                          = (2<<3),
-    AFS_16G                         = (3<<3),
-};
+// enum Ascale {
+//     AFS_2G                          = (0<<3),
+//     AFS_4G                          = (1<<3),
+//     AFS_8G                          = (2<<3),
+//     AFS_16G                         = (3<<3),
+// };
 
-enum Gscale {
-    GFS_250DPS                      = (0<<3),
-    GFS_500DPS                      = (1<<3),
-    GFS_1000DPS                     = (2<<3),
-    GFS_2000DPS                     = (3<<3),
-};
+// enum Gscale {
+//     GFS_250DPS                      = (0<<3),
+//     GFS_500DPS                      = (1<<3),
+//     GFS_1000DPS                     = (2<<3),
+//     GFS_2000DPS                     = (3<<3),
+// };
 
-enum LPFscale {
-    INV_FILTER_256HZ_NOLPF2         = (0),
-    INV_FILTER_188HZ                = (1),
-    INV_FILTER_98HZ                 = (2),
-    INV_FILTER_42HZ                 = (3),
-    INV_FILTER_20HZ                 = (4),
-    INV_FILTER_10HZ                 = (5),
-    INV_FILTER_5HZ                  = (6),
-    INV_FILTER_2100HZ_NOLPF         = (7)
-};
+// enum LPFscale {
+//     INV_FILTER_256HZ_NOLPF2         = (0),
+//     INV_FILTER_188HZ                = (1),
+//     INV_FILTER_98HZ                 = (2),
+//     INV_FILTER_42HZ                 = (3),
+//     INV_FILTER_20HZ                 = (4),
+//     INV_FILTER_10HZ                 = (5),
+//     INV_FILTER_5HZ                  = (6),
+//     INV_FILTER_2100HZ_NOLPF         = (7)
+// };
 
 class MPU9250 : public IMPU9250 {
  public:
@@ -49,16 +50,16 @@ class MPU9250 : public IMPU9250 {
     i2c_(i2c),
     device_address_(address),
     initialized_(false),
-    ascale_(AFS_2G),
-    gscale_(GFS_1000DPS),
-    lpfscale_(INV_FILTER_42HZ),
+    // ascale_(AFS_2G),
+    // gscale_(GFS_1000DPS),
+    // lpfscale_(INV_FILTER_42HZ),
     aRes(0),
     gRes(0) {}
 
     std::error_code Initialize() const;
-    void SetupGyro(Gscale val) const;
-    void SetupAccl(Ascale val) const;
-    void SetupLPF(LPFscale val) const;
+    // void SetupGyro(Gscale val) const;
+    // void SetupAccl(Ascale val) const;
+    // void SetupLPF(LPFscale val) const;
     void SetupSampleRate(uint16_t rate) const;
     // void SetupFIFO(uint8_t rate) const;
     void SetupCompass(void) const;
@@ -67,17 +68,17 @@ class MPU9250 : public IMPU9250 {
 
     AccelerationResult GetAccelerationResult() const;
     GyroResult GetGyroResult() const;
-    void getAres() const;
-    void getGres() const;
+    // void getAres() const;
+    // void getGres() const;
 
 
  protected:
     const II2C& i2c_;
     const uint8_t device_address_;
     mutable bool initialized_;
-    const Ascale ascale_;
-    const Gscale gscale_;
-    const LPFscale lpfscale_;
+    // const Ascale ascale_;
+    // const Gscale gscale_;
+    // const LPFscale lpfscale_;
 
     mutable float aRes;
     mutable float gRes;

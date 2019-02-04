@@ -9,11 +9,13 @@ b main.cc:126
 #b AK8963.cc:55
 #b AK8963.cc:67
 
-#b MPU9250.cc:34
+b MPU9250.cc:46
 #b MPU9250.cc:107
 #b MPU9250.cc:119
 #b MPU9250.cc:184
 #b MPU9250.cc:189
 #b MPU9250.cc:51
+
+b inv_mpu.cc:78
 
 continue

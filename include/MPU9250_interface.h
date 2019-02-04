@@ -84,8 +84,8 @@ class IMPU9250 {
 
         virtual GyroResult GetGyroResult() const = 0;
 
-        virtual void getAres() const = 0;
-        virtual void getGres() const = 0;
+        // virtual void getAres() const = 0;
+        // virtual void getGres() const = 0;
 
 };
 
